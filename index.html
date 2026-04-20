@@ -36,11 +36,11 @@
 html{background:var(--bg);color:var(--text);font-family:var(--fb);-webkit-font-smoothing:antialiased;font-size:16px}
 body{min-height:100dvh;overflow-x:hidden}
 .app{max-width:430px;margin:0 auto;padding:calc(var(--st) + 1.5rem) 1.25rem calc(var(--sb) + 5.5rem)}
-
+ 
 /* SCREENS */
 .scr{display:none}.scr.on{display:block;animation:fu .18s ease both}
 @keyframes fu{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-
+ 
 /* NAV */
 .nav{
   position:fixed;bottom:0;left:0;right:0;z-index:99;
@@ -58,16 +58,16 @@ body{min-height:100dvh;overflow-x:hidden}
 }
 .nb.on{color:var(--text)}
 .nb svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .15s}
-
+ 
 /* PAGE HEADER */
 .ph{margin-bottom:2rem}
 .ph-label{font-size:.65rem;font-weight:500;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem}
 .ph-title{font-family:var(--fd);font-size:clamp(2.4rem,8vw,3rem);font-weight:900;letter-spacing:-.03em;line-height:.95;color:var(--text)}
 .ph-sub{font-size:.75rem;color:var(--muted);margin-top:.5rem;font-weight:400}
-
+ 
 /* SECTION LABELS */
 .slbl{font-size:.6rem;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
-
+ 
 /* WEEK GRID */
 .wgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:.25rem;margin-bottom:1.75rem}
 .dcell{display:flex;flex-direction:column;align-items:center;gap:.2rem}
@@ -86,7 +86,7 @@ body{min-height:100dvh;overflow-x:hidden}
 .spill.full.sel{border-color:var(--accent-border);color:var(--text);background:var(--accent-dim)}
 .spill.dnp{border-color:var(--border)!important;color:var(--muted2)!important;background:var(--s1)!important;cursor:default}
 .spill svg{width:13px;height:13px}
-
+ 
 /* BUTTONS */
 .btn{
   width:100%;padding:.9rem 1.25rem;border-radius:12px;
@@ -107,13 +107,13 @@ body{min-height:100dvh;overflow-x:hidden}
 .bsm:active{background:var(--s2)}
 .bsm.ok{border-color:rgba(61,220,132,.3);color:var(--ok);background:rgba(61,220,132,.05)}
 .bsm.wh{border-color:var(--accent-border);color:var(--text);background:var(--accent-dim)}
-
+ 
 /* SESSION CARDS */
 .slist{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
 .sc{border-radius:14px;border:1px solid var(--border);background:var(--s1);overflow:hidden;transition:border-color .2s}
 .sc.tod-c{border-color:var(--accent-border)}
 .sc.done-c{opacity:.3}
-
+ 
 .card-top{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1rem;cursor:pointer;user-select:none}
 .card-top:active{background:var(--s2)}
 .card-info{display:flex;flex-direction:column;gap:.2rem}
@@ -133,9 +133,9 @@ body{min-height:100dvh;overflow-x:hidden}
 .card-chevron.op{background:var(--s3);border-color:var(--border2)}
 .card-chevron svg{width:12px;height:12px;stroke:var(--muted);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s}
 .card-chevron.op svg{transform:rotate(180deg);stroke:var(--text)}
-
+ 
 .card-body{padding:0 1rem 1rem;border-top:1px solid var(--border)}
-
+ 
 /* FATIGUE */
 .fat-row{display:flex;align-items:center;gap:.4rem;padding:.7rem 0;flex-wrap:wrap}
 .fat-lbl{font-size:.6rem;font-weight:500;color:var(--muted)}
@@ -152,7 +152,7 @@ body{min-height:100dvh;overflow-x:hidden}
   margin-bottom:.65rem;color:var(--warn);
   border:1px solid rgba(240,165,0,.18);background:rgba(240,165,0,.04);
 }
-
+ 
 /* PATTERN BLOCKS */
 .pblock{margin-bottom:.85rem}
 .phead{display:flex;align-items:center;gap:.5rem;padding:.3rem 0;margin-bottom:.35rem}
@@ -161,7 +161,7 @@ body{min-height:100dvh;overflow-x:hidden}
 .plabel{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 .pp-push{color:#fff}.pp-pull{color:var(--ok)}.pp-legs{color:var(--warn)}.pp-arms{color:#a78bfa}
 .pangle{font-size:.56rem;color:var(--muted);margin-left:auto;font-weight:400}
-
+ 
 /* EXERCISE ROWS */
 .exrow{
   border-radius:10px;border:1px solid var(--border);
@@ -210,15 +210,15 @@ body{min-height:100dvh;overflow-x:hidden}
 .alt-info{flex:1}
 .alt-name{font-size:.78rem;font-weight:500;line-height:1.3}
 .alt-note{font-size:.6rem;color:var(--muted);margin-top:.04rem;line-height:1.4}
-
+ 
 .card-actions{display:flex;gap:.35rem;margin-top:.8rem;flex-wrap:wrap}
-
+ 
 /* TODAY EMPTY */
 .tempty{text-align:center;padding:3.5rem 1rem}
 .tempty-icon{width:48px;height:48px;stroke:var(--muted2);fill:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 1rem}
 .tempty-title{font-family:var(--fd);font-size:1.4rem;font-weight:800;letter-spacing:-.02em;color:var(--muted2);margin-bottom:.4rem}
 .tempty-sub{font-size:.75rem;color:var(--muted2);line-height:1.6}
-
+ 
 /* PERF SCREEN */
 .ptabs{display:flex;gap:.2rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:0}
 .ptab{
@@ -230,11 +230,11 @@ body{min-height:100dvh;overflow-x:hidden}
   font-family:var(--fb);
 }
 .ptab.on{color:var(--text);border-bottom-color:var(--text)}
-
+ 
 /* LOG FORM */
 .log-section{margin-bottom:1.5rem}
 .log-section-title{font-size:.65rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
-
+ 
 /* SESSION SELECTOR */
 .sess-selector{
   width:100%;padding:.7rem .85rem;border-radius:10px;
@@ -245,7 +245,7 @@ body{min-height:100dvh;overflow-x:hidden}
   background-repeat:no-repeat;background-position:right .85rem center;padding-right:2.2rem;
 }
 .sess-selector:focus{outline:none;border-color:var(--accent-border)}
-
+ 
 /* EX LOG CARD */
 .ex-log-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:.85rem;margin-bottom:.6rem}
 .ex-log-name{font-size:.85rem;font-weight:600;margin-bottom:.55rem;line-height:1.3}
@@ -257,7 +257,7 @@ body{min-height:100dvh;overflow-x:hidden}
   cursor:pointer;transition:all .12s;font-family:var(--fb);
 }
 .alt-choice-btn.active{border-color:var(--accent-border);color:var(--text);background:var(--accent-dim)}
-
+ 
 .sets-table{width:100%;border-collapse:collapse;margin-bottom:.5rem}
 .sets-table th{font-size:.54rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:.25rem .3rem;text-align:center;border-bottom:1px solid var(--border)}
 .sets-table th:first-child{text-align:left;width:2rem}
@@ -278,11 +278,11 @@ body{min-height:100dvh;overflow-x:hidden}
   cursor:pointer;transition:all .13s;font-family:var(--fb);
 }
 .add-set-row:active{background:var(--s2)}
-
+ 
 /* FAT LOG */
 .fat-log-row{display:flex;align-items:center;gap:.4rem;margin:.7rem 0;flex-wrap:wrap}
 .fat-log-lbl{font-size:.62rem;color:var(--muted);font-weight:400}
-
+ 
 /* HISTORY */
 .hist-empty{font-size:.75rem;color:var(--muted);text-align:center;padding:2.5rem 0;line-height:1.7}
 .hist-group{margin-bottom:1.5rem}
@@ -302,7 +302,7 @@ body{min-height:100dvh;overflow-x:hidden}
   padding:.05rem .3rem;border-radius:3px;letter-spacing:.04em;
 }
 .hist-vol-total{font-size:.6rem;color:var(--muted);margin-top:.3rem}
-
+ 
 /* PROGRESS */
 .prog-empty{font-size:.75rem;color:var(--muted);text-align:center;padding:2rem 0;line-height:1.7}
 .prog-block{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:.9rem;margin-bottom:.75rem;overflow:hidden}
@@ -312,7 +312,7 @@ body{min-height:100dvh;overflow-x:hidden}
 .chart-wrap{height:72px;margin-bottom:.4rem}
 .chart-svg{width:100%;height:100%}
 .chart-dates{display:flex;justify-content:space-between;font-size:.52rem;color:var(--muted)}
-
+ 
 /* STATS */
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1rem}
 .stat-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:.9rem;display:flex;flex-direction:column;gap:.15rem}
@@ -323,7 +323,7 @@ body{min-height:100dvh;overflow-x:hidden}
 .wrow:last-child{border-bottom:none}
 .wrow-l{font-size:.78rem;font-weight:400}
 .wrow-r{font-size:.65rem;color:var(--muted)}
-
+ 
 /* INSTALL */
 .install-bar{
   display:none;border:1px solid var(--border2);border-radius:12px;
@@ -336,7 +336,7 @@ body{min-height:100dvh;overflow-x:hidden}
 .install-txt strong{display:block;font-size:.78rem;font-weight:600;color:var(--text);margin-bottom:.08rem}
 .install-txt span{font-size:.65rem;color:var(--muted)}
 .install-close{background:none;border:none;color:var(--muted2);font-size:1rem;cursor:pointer;padding:.2rem;flex-shrink:0}
-
+ 
 /* MODAL */
 .ovl{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);align-items:flex-end;justify-content:center}
 .ovl.show{display:flex;animation:fi .15s ease}
@@ -359,7 +359,7 @@ body{min-height:100dvh;overflow-x:hidden}
 .dur-opt.sel-s{border-color:rgba(240,165,0,.4);color:var(--warn);background:rgba(240,165,0,.05)}
 .dur-opt.sel-f{border-color:var(--accent-border);color:var(--text);background:var(--accent-dim)}
 .modal-actions{display:flex;flex-direction:column;gap:.45rem;margin-top:.9rem}
-
+ 
 /* TOAST */
 .toast{
   position:fixed;top:calc(var(--st) + 1rem);left:50%;transform:translateX(-50%);
@@ -369,13 +369,13 @@ body{min-height:100dvh;overflow-x:hidden}
 }
 @keyframes tin{from{opacity:0;transform:translateX(-50%) translateY(-6px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 @keyframes tout{to{opacity:0;transform:translateX(-50%) translateY(-6px)}}
-
+ 
 .mt1{margin-top:.75rem}.mt2{margin-top:1.25rem}.divider{height:1px;background:var(--border);margin:.9rem 0}
 </style>
 </head>
 <body>
 <div class="app">
-
+ 
   <!-- SEMAINE -->
   <div class="scr on" id="scr-week">
     <div class="ph">
@@ -383,7 +383,7 @@ body{min-height:100dvh;overflow-x:hidden}
       <div class="ph-title">Cette semaine</div>
       <div class="ph-sub">Sélectionne tes créneaux pour générer le programme</div>
     </div>
-
+ 
     <div class="install-bar" id="ibanner">
       <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
       <div class="install-txt">
@@ -392,7 +392,7 @@ body{min-height:100dvh;overflow-x:hidden}
       </div>
       <button class="install-close" onclick="dismissInstall()">&#x2715;</button>
     </div>
-
+ 
     <div class="slbl" style="margin-bottom:.5rem">Créneaux disponibles</div>
     <div style="display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:.35rem;font-size:.6rem;color:var(--muted)">
@@ -403,14 +403,14 @@ body{min-height:100dvh;overflow-x:hidden}
       </div>
     </div>
     <div class="wgrid" id="wgrid"></div>
-
+ 
     <div class="slbl mt2">Programme généré</div>
     <div class="slist" id="wslist">
       <div style="font-size:.72rem;color:var(--muted);padding:.3rem 0">Sélectionne des créneaux ci-dessus.</div>
     </div>
     <button class="btn ghost" onclick="resetWeek()">Réinitialiser la semaine</button>
   </div>
-
+ 
   <!-- AUJOURD'HUI -->
   <div class="scr" id="scr-today">
     <div class="ph">
@@ -420,7 +420,7 @@ body{min-height:100dvh;overflow-x:hidden}
     </div>
     <div id="today-body"></div>
   </div>
-
+ 
   <!-- PERFS -->
   <div class="scr" id="scr-perf">
     <div class="ph">
@@ -437,7 +437,7 @@ body{min-height:100dvh;overflow-x:hidden}
     <div id="perf-hist" style="display:none"></div>
     <div id="perf-prog" style="display:none"></div>
   </div>
-
+ 
   <!-- STATS -->
   <div class="scr" id="scr-stats">
     <div class="ph">
@@ -447,9 +447,9 @@ body{min-height:100dvh;overflow-x:hidden}
     </div>
     <div id="stats-body"></div>
   </div>
-
+ 
 </div>
-
+ 
 <!-- NAV -->
 <nav class="nav">
   <button class="nb on" id="nb-week" onclick="go('week')">
@@ -469,7 +469,7 @@ body{min-height:100dvh;overflow-x:hidden}
     Stats
   </button>
 </nav>
-
+ 
 <!-- MODAL -->
 <div class="ovl" id="ovl" onclick="closeModal(event)">
   <div class="modal">
@@ -491,7 +491,7 @@ body{min-height:100dvh;overflow-x:hidden}
     </div>
   </div>
 </div>
-
+ 
 <script>
 // ═══════════════════════════════════════════
 // DATA — Full Body A/B/C
@@ -500,14 +500,14 @@ body{min-height:100dvh;overflow-x:hidden}
 // Full  = 2 par pattern (8 exos, 2 bras)
 // Chaque exo : nom, séries, reps, repos, alts[]
 // ═══════════════════════════════════════════
-
+ 
 function rest(cat){
   // cat: 'strength'|'hyper'|'iso'
   if(cat==='strength') return '3–4 min';
   if(cat==='hyper') return '2–3 min';
   return '90 sec';
 }
-
+ 
 const V={
   A:{
     label:'Full Body A',
@@ -568,7 +568,7 @@ const V={
         ]}
     ]}
   },
-
+ 
   B:{
     label:'Full Body B',
     push:{angle:'Incliné — Rotation épaule',exos:[
@@ -628,7 +628,7 @@ const V={
         ]}
     ]}
   },
-
+ 
   C:{
     label:'Full Body C',
     push:{angle:'Décliné — Écarté',exos:[
@@ -689,7 +689,7 @@ const V={
     ]}
   }
 };
-
+ 
 const VC=['A','B','C'];
 const FAT={
   1:{lbl:'Frais',mod:+1,note:'Programme augmenté — +1 série sur les exercices principaux.'},
@@ -701,7 +701,7 @@ const FAT={
 const DAYS=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
 const DAYSF=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
 const PATTERNS=['push','pull','legs','arms'];
-
+ 
 // ═══════════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════════
@@ -713,11 +713,11 @@ function wk(){const k=wkKey();if(!ST.weeks[k])ST.weeks[k]={slots:[]};return ST.w
 function persist(){sv();}
 function todayIdx(){const d=new Date().getDay();return d===0?6:d-1;}
 function isoToday(){return new Date().toISOString().split('T')[0];}
-
+ 
 function totalDone(){return Object.values(ST.weeks).flatMap(w=>w.slots).filter(s=>s.done).length;}
 function assignVariants(slots){let vi=totalDone();return slots.map(s=>{if(s.done)return s;return{...s,variant:VC[vi++%3]};});}
 function rebuild(){const w=wk();w.slots=assignVariants(w.slots);persist();}
-
+ 
 // ═══════════════════════════════════════════
 // ROUTER
 // ═══════════════════════════════════════════
@@ -731,7 +731,7 @@ function go(n){
   if(n==='perf')renderPerf();
   if(n==='stats')renderStats();
 }
-
+ 
 // ═══════════════════════════════════════════
 // WEEK
 // ═══════════════════════════════════════════
@@ -760,7 +760,7 @@ function renderWeekGrid(){
     g.appendChild(col);
   });
 }
-
+ 
 function addSlot(day,dur){
   const w=wk();w.slots=w.slots.filter(s=>s.day!==day);
   w.slots.push({day,duration:dur,done:false,fatigue:2,variant:'A',date:null});
@@ -775,7 +775,7 @@ function markDone(day){
 }
 function setFatigue(day,f){const w=wk(),s=w.slots.find(x=>x.day===day);if(s){s.fatigue=f;persist();}renderWeek();if(todayIdx()===day)renderToday();}
 function resetWeek(){const k=wkKey();ST.weeks[k]={slots:[]};persist();renderWeek();}
-
+ 
 function renderWeek(){
   renderWeekGrid();
   const w=wk(),list=document.getElementById('wslist');
@@ -783,7 +783,7 @@ function renderWeek(){
   list.innerHTML='';
   w.slots.forEach(s=>list.appendChild(buildCard(s)));
 }
-
+ 
 // ═══════════════════════════════════════════
 // CARD BUILDER
 // ═══════════════════════════════════════════
@@ -793,7 +793,7 @@ function buildCard(slot){
   const isShort=slot.duration==='short';
   const card=document.createElement('div');
   card.className=`sc${slot.done?' done-c':''}${isT&&!slot.done?' tod-c':''}`;
-
+ 
   // Header
   const top=document.createElement('div');top.className='card-top';
   top.innerHTML=`<div class="card-info">
@@ -809,17 +809,17 @@ function buildCard(slot){
   <div class="card-chevron" id="cv-${slot.day}">
     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>`;
-
+ 
   // Body
   const body=document.createElement('div');body.className='card-body';body.style.display='none';
-
+ 
   let html=`<div class="fat-row">
     <span class="fat-lbl">Fatigue</span>
     <div class="fat-btns">${[1,2,3,4,5].map(f=>`<button class="fat-btn${f===fat?' on':''}" onclick="setFatigue(${slot.day},${f})">${f}</button>`).join('')}</div>
     <span style="font-size:.62rem;color:var(--muted);margin-left:.1rem">${fadj.lbl}</span>
   </div>`;
   if(fadj.note)html+=`<div class="fat-note">${fadj.note}</div>`;
-
+ 
   const patterns=isShort?['push','pull','legs']:['push','pull','legs','arms'];
   patterns.forEach(pat=>{
     const pd=vd[pat];
@@ -866,7 +866,7 @@ function buildCard(slot){
     });
     html+=`</div>`;
   });
-
+ 
   if(!slot.done){
     html+=`<div class="card-actions">
       <button class="bsm ok" onclick="markDone(${slot.day})">Marquer comme réalisée</button>
@@ -875,7 +875,7 @@ function buildCard(slot){
     </div>`;
   }
   body.innerHTML=html;
-
+ 
   top.onclick=()=>{
     const open=body.style.display!=='none';
     body.style.display=open?'none':'block';
@@ -884,13 +884,13 @@ function buildCard(slot){
   card.appendChild(top);card.appendChild(body);
   return card;
 }
-
+ 
 function toggleAlts(uid){
   const panel=document.getElementById('alts-'+uid);
   if(!panel)return;
   panel.classList.toggle('open');
 }
-
+ 
 function selectAlt(uid,altIdx,name){
   const w=wk();
   const parts=uid.split('-');
@@ -916,7 +916,7 @@ function selectAlt(uid,altIdx,name){
   // Close panel
   if(panel)panel.classList.remove('open');
 }
-
+ 
 // ═══════════════════════════════════════════
 // TODAY
 // ═══════════════════════════════════════════
@@ -930,7 +930,7 @@ function renderToday(){
   const body=document.getElementById('today-body');
   const titleEl=document.getElementById('today-title');
   const subEl=document.getElementById('today-sub');
-
+ 
   if(done){
     titleEl.textContent='Repos mérité';
     subEl.textContent='Séance réalisée. Récupère bien.';
@@ -957,13 +957,13 @@ function renderToday(){
   const c=buildCard(slot);body.appendChild(c);
   setTimeout(()=>{const h=c.querySelector('.card-top');if(h)h.click();},50);
 }
-
+ 
 // ═══════════════════════════════════════════
 // PERFS
 // ═══════════════════════════════════════════
 let perfTab='log';
 let logState={sessionKey:null,exos:[],fatigue:2};
-
+ 
 function switchTab(tab){
   perfTab=tab;
   ['log','hist','prog'].forEach(t=>{
@@ -973,9 +973,9 @@ function switchTab(tab){
   if(tab==='hist')renderHist();
   if(tab==='prog')renderProg();
 }
-
+ 
 function renderPerf(){switchTab(perfTab);if(perfTab==='log')renderLogForm();}
-
+ 
 function openPerfForSlot(day){
   // Pre-select this slot in perf log
   const w=wk(),slot=w.slots.find(s=>s.day===day);
@@ -983,7 +983,7 @@ function openPerfForSlot(day){
   initLogForSlot(slot);
   go('perf');
 }
-
+ 
 function initLogForSlot(slot){
   const vd=V[slot.variant];
   const isShort=slot.duration==='short';
@@ -1011,14 +1011,14 @@ function initLogForSlot(slot){
   });
   logState={sessionKey:`${slot.day}-${slot.variant}-${wkKey()}`,exos,fatigue:slot.fatigue||2,slotDay:slot.day,date:isoToday()};
 }
-
+ 
 function renderLogForm(){
   const el=document.getElementById('perf-log');
-
+ 
   // If no session pre-loaded, show session picker
   const w=wk();
   const availSlots=w.slots.filter(s=>!s.done||s.date===isoToday());
-
+ 
   if(!logState.exos.length){
     // Build session options
     let opts=`<option value="">-- Sélectionner une séance --</option>`;
@@ -1033,22 +1033,22 @@ function renderLogForm(){
     </div>`;
     return;
   }
-
+ 
   // Full log form
   let html=`<div class="log-section">
     <div class="log-section-title">Séance du ${formatDate(logState.date)} · Angle ${logState.exos[0]&&V[logState.exos[0].pat]?'':''}</div>`;
-
+ 
   // Fatigue
   html+=`<div class="fat-log-row">
     <span class="fat-log-lbl">Fatigue du jour</span>
     <div class="fat-btns">${[1,2,3,4,5].map(f=>`<button class="fat-btn${f===logState.fatigue?' on':''}" onclick="setLogFat(${f})">${f}</button>`).join('')}</div>
     <span style="font-size:.6rem;color:var(--muted);margin-left:.1rem">${FAT[logState.fatigue].lbl}</span>
   </div>`;
-
+ 
   logState.exos.forEach((ex,xi)=>{
     // Alt selector
     const altBtns=ex.allNames.map((n,ni)=>`<button class="alt-choice-btn${ex.chosenName===n?' active':''}" onclick="setLogAlt(${xi},${ni},'${n.replace(/'/g,"\\'")}'">${ni===0?'Principal':('Alt '+(ni))}</button>`).join('');
-
+ 
     // Sets rows
     const setRows=ex.sets.map((s,si)=>`<tr>
       <td>S${si+1}</td>
@@ -1056,7 +1056,7 @@ function renderLogForm(){
       <td><input class="sinput" type="number" inputmode="numeric" placeholder="reps" value="${s.reps}" onchange="updateLogSet(${xi},${si},'reps',this.value)"/></td>
       ${ex.sets.length>1?`<td><button style="background:none;border:none;color:var(--muted2);font-size:.75rem;cursor:pointer;padding:.2rem" onclick="removeLogSet(${xi},${si})">✕</button></td>`:'<td></td>'}
     </tr>`).join('');
-
+ 
     html+=`<div class="ex-log-card">
       <div class="ex-log-name">${ex.mainName}</div>
       <div class="ex-log-alt-row">
@@ -1070,14 +1070,14 @@ function renderLogForm(){
       <button class="add-set-row" onclick="addLogSet(${xi})">+ Ajouter une série</button>
     </div>`;
   });
-
+ 
   html+=`<button class="btn pri mt2" onclick="saveLog()">Enregistrer les performances</button>
     <button class="btn ghost mt1" onclick="cancelLog()">Annuler</button>
   </div>`;
-
+ 
   el.innerHTML=html;
 }
-
+ 
 function loadSlotForLog(dayStr){
   if(!dayStr)return;
   const day=parseInt(dayStr);
@@ -1090,7 +1090,7 @@ function updateLogSet(xi,si,field,val){if(logState.exos[xi]&&logState.exos[xi].s
 function addLogSet(xi){logState.exos[xi].sets.push({kg:'',reps:''});renderLogForm();}
 function removeLogSet(xi,si){if(logState.exos[xi].sets.length>1){logState.exos[xi].sets.splice(si,1);renderLogForm();}}
 function cancelLog(){logState={sessionKey:null,exos:[],fatigue:2};renderLogForm();}
-
+ 
 function saveLog(){
   if(!logState.exos.length){showToast('Aucune séance sélectionnée');return;}
   const entries=[];
@@ -1114,7 +1114,7 @@ function saveLog(){
   renderLogForm();
   showToast('Performances enregistrées');
 }
-
+ 
 // ═══════════════════════════════════════════
 // HISTORY
 // ═══════════════════════════════════════════
@@ -1152,7 +1152,7 @@ function renderHist(){
   });
   el.innerHTML=html;
 }
-
+ 
 // ═══════════════════════════════════════════
 // PROGRESSION
 // ═══════════════════════════════════════════
@@ -1193,7 +1193,7 @@ function renderProg(){
   if(!html)html=`<div class="prog-empty">Il faut au moins 2 sessions par exercice pour afficher une courbe.</div>`;
   el.innerHTML=html;
 }
-
+ 
 // ═══════════════════════════════════════════
 // STATS
 // ═══════════════════════════════════════════
@@ -1219,7 +1219,7 @@ function renderStats(){
       </div>`).join('')}
     </div>`;
 }
-
+ 
 // ═══════════════════════════════════════════
 // MODAL
 // ═══════════════════════════════════════════
@@ -1230,17 +1230,17 @@ function selDur(d){mDur=d;refreshModal();}
 function confirmModal(){if(mDay===null)return;const w=wk(),s=w.slots.find(x=>x.day===mDay);if(s){s.duration=mDur;persist();}closeModal();renderWeek();renderToday();}
 function removeSlotModal(){if(mDay===null)return;removeSlot(mDay);}
 function closeModal(e){if(e&&e.target!==document.getElementById('ovl'))return;document.getElementById('ovl').classList.remove('show');mDay=null;}
-
+ 
 // ═══════════════════════════════════════════
 // UTILS
 // ═══════════════════════════════════════════
 function formatDate(iso){if(!iso)return'';const d=new Date(iso+'T00:00:00');return d.toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'2-digit'});}
 function showToast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2200);}
-
+ 
 // INSTALL
 function dismissInstall(){document.getElementById('ibanner').classList.remove('show');localStorage.setItem('bloc_inst3','1');}
 function checkInstall(){const ok=localStorage.getItem('bloc_inst3'),sa=window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches;if(!ok&&!sa)document.getElementById('ibanner').classList.add('show');}
-
+ 
 // INIT
 renderWeek();checkInstall();
 const mf={name:'BLOC Workout',short_name:'BLOC',start_url:'.',display:'standalone',background_color:'#0a0a0a',theme_color:'#0a0a0a',orientation:'portrait',icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0a0a'/%3E%3Ctext y='.85em' font-size='72' x='14' font-family='sans-serif' font-weight='900' fill='white'%3EB%3C/text%3E%3C/svg%3E",sizes:'192x192',type:'image/svg+xml'}]};
