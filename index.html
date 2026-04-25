@@ -177,7 +177,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .debt-sublbl{font-family:var(--fm);font-size:.5rem;color:var(--muted)}
 
 /* ─── DAY PANEL ────────────────────────────────────── */
-.day-panel{padding:1rem 1.125rem}
+.day-panel{padding:1rem 1.125rem calc(var(--sb) + 5.5rem)}
 .day-panel-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;gap:.5rem}
 .day-panel-date{
   font-family:var(--fd);font-size:clamp(2rem,7vw,2.6rem);font-weight:900;
@@ -466,6 +466,137 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 .mt1{margin-top:.75rem}.mt2{margin-top:1.25rem}
 .divider{height:1px;background:var(--border);margin:.85rem 0}
+
+/* ═══════════════════════════════════════════════════
+   LIBRARY SCREEN
+═══════════════════════════════════════════════════ */
+/* Back button from library */
+.lib-back{
+  display:flex;align-items:center;gap:.5rem;
+  background:none;border:none;cursor:pointer;
+  font-family:var(--fd);font-size:.75rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--muted);
+  padding:calc(var(--st) + .75rem) 1.125rem .75rem;
+  transition:color .15s;
+}
+.lib-back:active{color:var(--text)}
+.lib-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Exercise card in library */
+.lib-ex{
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:var(--r);margin-bottom:.75rem;overflow:hidden;
+  scroll-margin-top:6rem;
+}
+.lib-ex-header{
+  padding:.85rem 1rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:flex-start;gap:.75rem;
+}
+.lib-ex-pat{
+  width:3px;border-radius:2px;flex-shrink:0;align-self:stretch;
+  min-height:1.8rem;
+}
+.lib-ex-info{flex:1}
+.lib-ex-name{
+  font-family:var(--fd);font-size:1.25rem;font-weight:900;
+  text-transform:uppercase;letter-spacing:-.01em;line-height:1;
+  margin-bottom:.25rem;
+}
+.lib-ex-tags{display:flex;gap:.25rem;flex-wrap:wrap}
+.lib-ex-tag{
+  font-family:var(--fm);font-size:.5rem;padding:.08rem .35rem;
+  border-radius:3px;background:var(--s3);color:var(--muted);
+  letter-spacing:.05em;
+}
+.lib-ex-tag.primary{color:var(--gold);background:var(--gold-dim);border:1px solid var(--gold-border)}
+.lib-ex-tag.secondary{color:var(--ok);background:var(--ok-dim)}
+
+/* Muscle diagram */
+.lib-muscle-wrap{
+  display:flex;gap:.75rem;padding:.85rem 1rem;
+  border-bottom:1px solid var(--border);
+  align-items:center;
+  background:var(--s2);
+}
+.lib-muscle-svg{flex-shrink:0}
+.lib-muscle-legend{display:flex;flex-direction:column;gap:.4rem;flex:1}
+.lib-muscle-group{display:flex;flex-direction:column;gap:.15rem}
+.lib-muscle-label{font-family:var(--fm);font-size:.52rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.lib-muscle-names{font-size:.72rem;font-weight:500;line-height:1.4}
+.lib-muscle-primary{color:var(--gold)}
+.lib-muscle-secondary{color:var(--text2)}
+
+/* Animation */
+.lib-anim-wrap{
+  padding:.85rem 1rem;border-bottom:1px solid var(--border);
+  background:var(--s1);
+}
+.lib-anim-title{font-family:var(--fm);font-size:.52rem;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.1em;margin-bottom:.65rem}
+.lib-anim-stage{
+  background:var(--s2);border:1px solid var(--border);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  height:140px;position:relative;overflow:hidden;
+}
+
+/* Cues */
+.lib-cues{padding:.85rem 1rem}
+.lib-cues-title{font-family:var(--fm);font-size:.52rem;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem}
+.lib-cue{
+  display:flex;gap:.55rem;align-items:flex-start;
+  padding:.4rem 0;border-bottom:1px solid var(--border);
+}
+.lib-cue:last-child{border-bottom:none}
+.lib-cue-num{
+  font-family:var(--fd);font-size:.7rem;font-weight:800;color:var(--gold);
+  flex-shrink:0;width:1.2rem;line-height:1.4;
+}
+.lib-cue-text{font-size:.75rem;line-height:1.55;color:var(--text2)}
+.lib-cue-text strong{color:var(--text);font-weight:600}
+
+/* Pattern filter tabs */
+.lib-filters{
+  display:flex;gap:.3rem;padding:.75rem 1.125rem;
+  overflow-x:auto;scrollbar-width:none;
+  border-bottom:1px solid var(--border);
+  background:rgba(8,8,8,.97);
+  position:sticky;top:0;z-index:10;
+}
+.lib-filters::-webkit-scrollbar{display:none}
+.lib-filter{
+  flex-shrink:0;padding:.35rem .75rem;border-radius:20px;
+  border:1px solid var(--border2);background:transparent;
+  color:var(--muted);font-family:var(--fd);font-size:.68rem;
+  font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  cursor:pointer;transition:all .14s;
+}
+.lib-filter.on{border-color:var(--gold-border);color:var(--gold);background:var(--gold-dim)}
+.lib-filter.pull.on{border-color:var(--ok-border);color:var(--ok);background:var(--ok-dim)}
+.lib-filter.legs.on{border-color:rgba(201,168,76,.3);color:var(--gold);background:var(--gold-dim)}
+.lib-filter.arms.on{border-color:rgba(167,139,250,.3);color:#a78bfa;background:rgba(167,139,250,.08)}
+
+/* Search */
+.lib-search-wrap{padding:.6rem 1.125rem;background:rgba(8,8,8,.97);position:sticky;top:2.6rem;z-index:9;border-bottom:1px solid var(--border)}
+.lib-search{
+  width:100%;padding:.55rem .85rem;border-radius:10px;
+  border:1px solid var(--border2);background:var(--s2);
+  color:var(--text);font-family:var(--fb);font-size:.8rem;
+  transition:border-color .12s;
+}
+.lib-search:focus{outline:none;border-color:var(--gold-border)}
+.lib-search::placeholder{color:var(--muted2)}
+
+/* Guide button on exercise row */
+.ex-guide-btn{
+  width:22px;height:22px;border-radius:50%;
+  border:1px solid var(--border2);background:var(--s3);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;transition:all .13s;
+  color:var(--muted);
+}
+.ex-guide-btn:active{background:var(--s4);border-color:var(--gold-border);color:var(--gold)}
+.ex-guide-btn svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 </style>
 </head>
 <body>
@@ -521,6 +652,25 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   </div>
 </div>
 
+<!-- ═══════ LIBRARY SCREEN ═══════ -->
+<div class="scr" id="scr-lib">
+  <button class="lib-back" id="lib-back-btn" onclick="closeLib()">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Retour
+  </button>
+  <div class="lib-filters" id="lib-filters">
+    <button class="lib-filter on" onclick="filterLib('all',this)">Tous</button>
+    <button class="lib-filter" onclick="filterLib('push',this)">Push</button>
+    <button class="lib-filter pull" onclick="filterLib('pull',this)">Pull</button>
+    <button class="lib-filter legs" onclick="filterLib('legs',this)">Legs</button>
+    <button class="lib-filter arms" onclick="filterLib('arms',this)">Bras</button>
+  </div>
+  <div class="lib-search-wrap">
+    <input class="lib-search" type="search" placeholder="Rechercher un exercice..." oninput="searchLib(this.value)" id="lib-search"/>
+  </div>
+  <div class="scr-inner" style="padding-top:.75rem" id="lib-body"></div>
+</div>
+
 </div><!-- .app -->
 
 <!-- NAV -->
@@ -532,6 +682,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   <button class="nb" id="nb-perf" onclick="go('perf')">
     <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
     Perfs
+  </button>
+  <button class="nb" id="nb-lib" onclick="go('lib')">
+    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    Guide
   </button>
   <button class="nb" id="nb-stats" onclick="go('stats')">
     <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
@@ -559,75 +713,145 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 <script>
 // ════════════════════════════════════════════════════════
-// EXERCISE DATABASE
+// EXERCISE ROTATION — counts done sessions per pattern
+// to rotate the main compound lift angle every 3 sessions
 // ════════════════════════════════════════════════════════
+// Push angles: A=couché plat, B=incliné 30°, C=décliné/dips
+// Pull angles: A=prise large vertical, B=supination rowing, C=prise neutre
+// Legs angles: A=squat+SDT roumain, B=squat+SDT conventionnel, C=leg press+hip thrust
+
+const PUSH_ROTATIONS=[
+  {// A — Horizontal
+    main:{name:'Développé couché barre',sets:5,reps:'3–5',cat:'strength',
+      alts:[{name:'Développé couché haltères',note:'Amplitude plus grande'},{name:'Smith machine couché',note:'Guidage barre'},{name:'Pompes lestées',note:'Sans banc'}]},
+    aux:{name:'Press épaules barre (debout)',sets:3,reps:'5–7',cat:'strength',
+      alts:[{name:'Press épaules haltères assis',note:'Plus de liberté'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},
+    label:'Horizontal lourd'
+  },
+  {// B — Incliné
+    main:{name:'Développé incliné barre 30°',sets:5,reps:'3–5',cat:'strength',
+      alts:[{name:'Développé incliné haltères',note:'Meilleur étirement pectoral'},{name:'Développé incliné machine',note:'Guidé'},{name:'Pompes pieds surélevés',note:'Sans banc'}]},
+    aux:{name:'Press épaules barre (debout)',sets:3,reps:'5–7',cat:'strength',
+      alts:[{name:'Press épaules haltères assis',note:'Plus de liberté'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},
+    label:'Incliné 30°'
+  },
+  {// C — Décliné / Dips
+    main:{name:'Dips lestés (buste incliné, pecs)',sets:5,reps:'4–6',cat:'strength',
+      alts:[{name:'Développé décliné barre',note:'Si barre de dips indisponible'},{name:'Développé décliné haltères',note:'Amplitude maximale'},{name:'Écarté câble prise haute',note:'Tension constante pec bas'}]},
+    aux:{name:'Press épaules haltères assis',sets:3,reps:'6–8',cat:'strength',
+      alts:[{name:'Press épaules barre debout',note:'Composé classique'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},
+    label:'Décliné / Dips'
+  }
+];
+
+const PULL_ROTATIONS=[
+  {// A — Vertical prise large
+    main:{name:'Tractions lestées (prise large)',sets:5,reps:'3–5',cat:'strength',
+      alts:[{name:'Tirage poulie haute prise large',note:'Charge ajustable'},{name:'Tractions assistées machine',note:'Version allégée'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'}]},
+    aux:{name:'Rowing barre pronation',sets:3,reps:'5–7',cat:'strength',
+      alts:[{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Rowing machine chest-supported',note:'Enlève charge lombaire'},{name:'Tirage horizontal câble',note:'Tension constante'}]},
+    label:'Vertical prise large'
+  },
+  {// B — Rowing supination
+    main:{name:'Rowing barre supination',sets:5,reps:'4–6',cat:'strength',
+      alts:[{name:'Rowing haltère unilatéral',note:'Unilatéral'},{name:'Smith machine rowing',note:'Trajectoire fixe'},{name:'Tirage câble serrée',note:'Tension constante'}]},
+    aux:{name:'Tractions prise neutre',sets:3,reps:'5–7',cat:'strength',
+      alts:[{name:'Tirage poulie haute prise neutre',note:'Charge ajustable'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'},{name:'Rowing T-bar',note:'Alternative'}]},
+    label:'Rowing horizontal'
+  },
+  {// C — Prise neutre / Pull-over
+    main:{name:'Tractions prise neutre',sets:5,reps:'3–5',cat:'strength',
+      alts:[{name:'Tirage poulie haute prise neutre',note:'Charge ajustable'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'},{name:'Rowing T-bar',note:'Alternative'}]},
+    aux:{name:'Rowing barre pronation',sets:3,reps:'5–7',cat:'strength',
+      alts:[{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Rowing machine chest-supported',note:'Enlève charge lombaire'},{name:'Tirage horizontal câble',note:'Tension constante'}]},
+    label:'Prise neutre'
+  }
+];
+
+const LEGS_ROTATIONS=[
+  {// A — Squat + SDT roumain
+    main:{name:'Squat barre',sets:5,reps:'3–5',cat:'strength',
+      alts:[{name:'Hack squat machine',note:'Si rack indisponible'},{name:'Leg press pieds hauts',note:'Moins de compression spinale'},{name:'Goblet squat haltère',note:'Mobilité'}]},
+    aux:{name:'Soulevé de terre roumain',sets:3,reps:'6–8',cat:'strength',
+      alts:[{name:'Hip thrust barre',note:'Focus fessiers'},{name:'Good morning',note:'Renforcement postérieur'},{name:'Leg curl couché',note:'Isolation ischio'}]},
+    label:'Squat + SDT roumain'
+  },
+  {// B — Squat + SDT conventionnel
+    main:{name:'Squat barre',sets:5,reps:'3–5',cat:'strength',
+      alts:[{name:'Hack squat machine',note:'Si rack indisponible'},{name:'Leg press pieds hauts',note:'Moins de compression spinale'},{name:'Goblet squat',note:'Mobilité'}]},
+    aux:{name:'Soulevé de terre conventionnel',sets:4,reps:'3–5',cat:'strength',
+      alts:[{name:'Soulevé de terre sumo',note:'Placement plus large'},{name:'Trap bar deadlift',note:'Plus sécurisé'},{name:'SDT roumain',note:'Accent ischio'}]},
+    label:'Squat + SDT conventionnel'
+  },
+  {// C — Leg press + Hip thrust
+    main:{name:'Leg press pieds hauts (largeur épaules)',sets:5,reps:'6–8',cat:'strength',
+      alts:[{name:'Hack squat machine',note:'Similaire, position debout'},{name:'Squat barre',note:'Si leg press indisponible'},{name:'Leg press pieds serrés',note:'Accent vaste externe'}]},
+    aux:{name:'Hip thrust barre',sets:4,reps:'6–8',cat:'strength',
+      alts:[{name:'Hip thrust haltère unilatéral',note:'Si barre indisponible'},{name:'Glute bridge au sol',note:'Sans matériel'},{name:'SDT roumain',note:'Si banc indisponible'}]},
+    label:'Leg press + Hip thrust'
+  }
+];
+
+// Auxiliaires volume (long sessions) — ne rotate pas, c'est du volume accessoire
+const PUSH_VOL=[
+  {name:'Élévations latérales câble',sets:3,reps:'12–15',cat:'iso',
+    alts:[{name:'Élévations latérales haltères',note:'Version classique'},{name:'Face pull corde',note:'Rotateurs externes'},{name:'Élévations machine',note:'Guidé'}]},
+  {name:'Développé incliné haltères',sets:3,reps:'10–12',cat:'hyper',
+    alts:[{name:'Développé incliné barre',note:'Plus de charge possible'},{name:'Écarté câble prise basse',note:'Tension constante pec bas'},{name:'Pec deck machine',note:'Isolation stricte'}]},
+  {name:'Écarté câble prise basse (fly)',sets:3,reps:'12–14',cat:'iso',
+    alts:[{name:'Écarté haltères plat',note:'Accessible partout'},{name:'Pec deck machine',note:'Isolation stricte'},{name:'Crossover câble debout',note:'Angle polyvalent'}]}
+];
+const PULL_VOL=[
+  {name:'Pull-over poulie haute',sets:3,reps:'10–12',cat:'hyper',
+    alts:[{name:'Pull-over haltère couché',note:'Liberté de mouvement'},{name:'Pull-over câble basse poulie',note:'Angle inversé'},{name:'Tirage poulie basse prise large',note:'Alternative'}]},
+  {name:'Face pull corde',sets:3,reps:'15',cat:'iso',
+    alts:[{name:'Oiseau haltères assis',note:'Sans poulie'},{name:'Tirage horizontal câble prise large',note:'Accent rhomboïdes'},{name:'Rowing machine prise large',note:'Version guidée'}]},
+  {name:'Tirage horizontal câble (prise serrée)',sets:3,reps:'10–12',cat:'hyper',
+    alts:[{name:'Rowing machine prise serrée',note:'Guidé'},{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Pull-over câble basse poulie',note:'Grand dorsal bas'}]}
+];
+const LEGS_VOL=[
+  {name:'Fentes marchées haltères',sets:3,reps:'10/jambe',cat:'hyper',
+    alts:[{name:'Split squat bulgare',note:'Plus de charge'},{name:'Step-up box',note:'Unilatéral doux'},{name:'Fentes statiques barre',note:'Plus stable'}]},
+  {name:'Leg curl couché',sets:3,reps:'10–12',cat:'hyper',
+    alts:[{name:'Leg curl assis',note:'Plus grand étirement'},{name:'Leg curl debout unilatéral',note:'Unilatéral'},{name:'Hip thrust barre',note:'Fessiers + ischio'}]},
+  {name:'Hip thrust barre',sets:3,reps:'10–12',cat:'hyper',
+    alts:[{name:'Hip thrust haltère unilatéral',note:'Si barre indisponible'},{name:'Glute bridge',note:'Sans matériel'},{name:'SDT roumain',note:'Variation'}]}
+];
+
+function getPatternRotationIdx(pat){
+  // Count done sessions for this pattern across all time
+  let count=0;
+  Object.values(ST.sessions).forEach(s=>{
+    if(s.done&&s.patterns&&s.patterns.includes(pat))count++;
+  });
+  return count%3;
+}
+
+function getRotationExos(pat,duration){
+  const idx=getPatternRotationIdx(pat);
+  let rotations,vol;
+  if(pat==='push'){rotations=PUSH_ROTATIONS;vol=PUSH_VOL;}
+  else if(pat==='pull'){rotations=PULL_ROTATIONS;vol=PULL_VOL;}
+  else{rotations=LEGS_ROTATIONS;vol=LEGS_VOL;}
+  const rot=rotations[idx];
+  if(duration==='short')return{exos:[rot.main,rot.aux],angle:rot.label};
+  // Long: main + aux + 2 volume exos (pick by rotation idx)
+  const v1=vol[idx%vol.length];
+  const v2=vol[(idx+1)%vol.length];
+  return{exos:[rot.main,rot.aux,v1,v2],angle:rot.label};
+}
+
+const ARMS_LONG=[
+  {name:'Curl barre / Extension corde (Superset)',sets:2,reps:'10–12',cat:'iso',
+    alts:[{name:'Curl EZ-bar / Skull crusher',note:'Moins de stress poignets'},{name:'Curl haltères / Dips bancs',note:'Si poulie indisponible'},{name:'Curl câble / Extension poulie basse',note:'Tension constante'}]}
+];
+
 function rest(cat){
   if(cat==='strength')return'3–4 min';
   if(cat==='hyper')return'2–3 min';
   return'90 sec';
 }
-const PUSH={
-  angle_short:'Press horizontal lourd',angle_long:'Press horizontal + vertical',
-  exos_short:[
-    {name:'Développé couché barre',sets:5,reps:'3–5',cat:'strength',
-      alts:[{name:'Développé couché haltères',note:'Amplitude plus grande, utile si gêne épaules'},{name:'Smith machine couché',note:'Guidage barre, si seul'},{name:'Pompes lestées',note:'Sans banc'}]},
-    {name:'Press épaules barre (debout)',sets:3,reps:'5–7',cat:'strength',
-      alts:[{name:'Press épaules haltères assis',note:'Plus de liberté'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux deltoïde'}]}
-  ],
-  exos_long:[
-    {name:'Développé couché barre',sets:5,reps:'3–5',cat:'strength',
-      alts:[{name:'Développé couché haltères',note:'Amplitude plus grande'},{name:'Smith machine couché',note:'Guidage barre'},{name:'Pompes lestées',note:'Sans banc'}]},
-    {name:'Press épaules barre (debout)',sets:4,reps:'5–6',cat:'strength',
-      alts:[{name:'Press épaules haltères assis',note:'Liberté de mouvement'},{name:'Press militaire machine',note:'Trajectoire fixe'},{name:'Press Arnold',note:'3 faisceaux'}]},
-    {name:'Développé incliné barre 30°',sets:3,reps:'8–10',cat:'hyper',
-      alts:[{name:'Développé incliné haltères',note:'Meilleur étirement'},{name:'Développé incliné machine',note:'Guidé'},{name:'Pompes pieds surélevés',note:'Sans banc'}]},
-    {name:'Élévations latérales câble',sets:3,reps:'12–15',cat:'iso',
-      alts:[{name:'Élévations latérales haltères',note:'Version classique'},{name:'Face pull corde',note:'Rotateurs externes'},{name:'Élévations machine',note:'Guidé'}]}
-  ]
-};
-const PULL={
-  angle_short:'Tirage vertical lourd',angle_long:'Tirage vertical + Rowing',
-  exos_short:[
-    {name:'Tractions lestées (prise large)',sets:5,reps:'3–5',cat:'strength',
-      alts:[{name:'Tirage poulie haute prise large',note:'Charge ajustable'},{name:'Tractions assistées machine',note:'Version allégée'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'}]},
-    {name:'Rowing barre pronation',sets:3,reps:'5–7',cat:'strength',
-      alts:[{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres G/D'},{name:'Rowing machine chest-supported',note:'Enlève charge lombaire'},{name:'Tirage horizontal câble',note:'Tension constante'}]}
-  ],
-  exos_long:[
-    {name:'Tractions lestées (prise large)',sets:5,reps:'3–5',cat:'strength',
-      alts:[{name:'Tirage poulie haute prise large',note:'Charge ajustable'},{name:'Tractions assistées machine',note:'Version allégée'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'}]},
-    {name:'Rowing barre supination',sets:4,reps:'5–6',cat:'strength',
-      alts:[{name:'Rowing haltère unilatéral',note:'Unilatéral'},{name:'Smith machine rowing',note:'Trajectoire fixe'},{name:'Tirage câble serrée',note:'Tension constante'}]},
-    {name:'Pull-over poulie haute',sets:3,reps:'10–12',cat:'hyper',
-      alts:[{name:'Pull-over haltère couché',note:'Liberté de mouvement'},{name:'Pull-over câble basse poulie',note:'Angle inversé'},{name:'Tirage poulie basse prise large',note:'Alternative'}]},
-    {name:'Face pull corde',sets:3,reps:'15',cat:'iso',
-      alts:[{name:'Oiseau haltères assis',note:'Sans poulie'},{name:'Tirage horizontal câble prise large',note:'Accent rhomboïdes'},{name:'Rowing machine prise large',note:'Version guidée'}]}
-  ]
-};
-const LEGS={
-  angle_short:'Quad dominant lourd',angle_long:'Quad + Ischio + Fessiers',
-  exos_short:[
-    {name:'Squat barre',sets:5,reps:'3–5',cat:'strength',
-      alts:[{name:'Hack squat machine',note:'Si rack indisponible'},{name:'Leg press pieds hauts',note:'Moins de compression spinale'},{name:'Goblet squat haltère',note:'Mobilité'}]},
-    {name:'Soulevé de terre roumain',sets:3,reps:'6–8',cat:'strength',
-      alts:[{name:'Hip thrust barre',note:'Focus fessiers'},{name:'Good morning',note:'Renforcement postérieur'},{name:'Leg curl couché',note:'Isolation ischio'}]}
-  ],
-  exos_long:[
-    {name:'Squat barre',sets:5,reps:'3–5',cat:'strength',
-      alts:[{name:'Hack squat machine',note:'Si rack indisponible'},{name:'Leg press pieds hauts',note:'Moins de compression spinale'},{name:'Goblet squat',note:'Mobilité'}]},
-    {name:'Soulevé de terre conventionnel',sets:4,reps:'3–5',cat:'strength',
-      alts:[{name:'Soulevé de terre sumo',note:'Placement plus large'},{name:'Trap bar deadlift',note:'Plus sécurisé'},{name:'SDT roumain',note:'Accent ischio'}]},
-    {name:'Fentes marchées haltères',sets:3,reps:'10/jambe',cat:'hyper',
-      alts:[{name:'Split squat bulgare',note:'Plus de charge'},{name:'Step-up box',note:'Unilatéral doux'},{name:'Fentes statiques barre',note:'Plus stable'}]},
-    {name:'Leg curl couché',sets:3,reps:'10–12',cat:'hyper',
-      alts:[{name:'Leg curl assis',note:'Plus grand étirement'},{name:'Leg curl debout unilatéral',note:'Unilatéral'},{name:'Hip thrust barre',note:'Fessiers + ischio'}]}
-  ]
-};
-const ARMS_LONG=[
-  {name:'Curl barre / Extension corde (Superset)',sets:2,reps:'10–12',cat:'iso',
-    alts:[{name:'Curl EZ-bar / Skull crusher',note:'Moins de stress poignets'},{name:'Curl haltères / Dips bancs',note:'Si poulie indisponible'},{name:'Curl câble / Extension poulie basse',note:'Tension constante'}]}
-];
-const PD={push:PUSH,pull:PULL,legs:LEGS};
+
 const PATS=['push','pull','legs'];
 const PLBL={push:'Push',pull:'Pull',legs:'Legs'};
 const PCOL={push:'var(--text2)',pull:'var(--ok)',legs:'var(--gold)'};
@@ -660,9 +884,19 @@ function sv(){try{localStorage.setItem('bloc8',JSON.stringify(ST));}catch(e){}}
 let ST=ld();
 function persist(){sv();}
 
-function isoDate(d){return d.toISOString().split('T')[0];}
+function isoDate(d){
+  // Always use LOCAL date, not UTC
+  const y=d.getFullYear();
+  const m=String(d.getMonth()+1).padStart(2,'0');
+  const day=String(d.getDate()).padStart(2,'0');
+  return`${y}-${m}-${day}`;
+}
 function isoToday(){return isoDate(new Date());}
-function dateFromIso(s){return new Date(s+'T00:00:00');}
+function dateFromIso(s){
+  // Parse as local midnight, not UTC midnight
+  const [y,m,d]=s.split('-').map(Number);
+  return new Date(y,m-1,d);
+}
 
 // Session CRUD
 function getSession(iso){return ST.sessions[iso]||null;}
@@ -718,11 +952,11 @@ function generateSession(s){
   const fadj=FAT[s.fatigue||2];
   const out=[];
   patterns.forEach(pat=>{
-    const pd=PD[pat];
-    const exos=(isShort?pd.exos_short:pd.exos_long).map((ex,ei)=>({
+    const {exos,angle}=getRotationExos(pat,s.duration);
+    const processed=exos.map((ex,ei)=>({
       ...ex,sets:ei===0?Math.max(2,ex.sets+fadj.mod):ex.sets
     }));
-    out.push({pat,angle:isShort?pd.angle_short:pd.angle_long,exos});
+    out.push({pat,angle,exos:processed});
   });
   if(!isShort)out.push({pat:'arms',angle:'Superset antagoniste',exos:ARMS_LONG.map(e=>({...e}))});
   return out;
@@ -977,10 +1211,10 @@ function renderDayPanel(){
 
   if(s){
     html+=buildCardHTML(iso,s);
-  } else if(!isPast){
-    // Show add session panel
+  } else {
+    // ALL days (past, today, future) can have a session added
     html+=`<div class="add-session-panel">
-      <div class="add-session-title">Planifier une séance</div>
+      <div class="add-session-title">${isPast?'Ajouter une séance passée':'Planifier une séance'}</div>
       <div class="dur-row">
         <div class="dur-opt short" onclick="addSession('${iso}','short')">
           Court<small>~1h · Force pure</small>
@@ -990,18 +1224,10 @@ function renderDayPanel(){
         </div>
       </div>
     </div>`;
-
-    // If past/today but no session, show empty
-    html+=`<div class="tempty" style="padding:1.5rem 0">
-      <svg class="tempty-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <div class="tempty-title">Repos</div>
-      <div class="tempty-sub">Aucune séance planifiée.<br>Ajoute un créneau ci-dessus.</div>
-    </div>`;
-  } else {
-    html+=`<div class="tempty" style="padding:1.5rem 0">
+    html+=`<div class="tempty" style="padding:1.25rem 0">
       <svg class="tempty-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
       <div class="tempty-title">Repos</div>
-      <div class="tempty-sub">Aucune séance ce jour.</div>
+      <div class="tempty-sub">${isPast?'Aucune séance enregistrée ce jour.':'Aucune séance planifiée.'}</div>
     </div>`;
   }
 
@@ -1024,6 +1250,9 @@ function buildCardHTML(iso,s){
   const fadj=FAT[fat];
   const maxDebt=Math.max(...session.filter(x=>x.pat!=='arms').map(x=>daysSince(last[x.pat])));
   const isUrgent=maxDebt>=5;
+  // Rotation cycle badge
+  const rotIdx=session.filter(x=>x.pat!=='arms').map(x=>getPatternRotationIdx(x.pat));
+  const cycleLabel=['Cycle A','Cycle B','Cycle C'][rotIdx[0]||0];
 
   let h=`<div class="sc${s.done?' done-c':''}${isUrgent&&!s.done?' priority-urgent':''}" id="card-${iso}">
     <div class="card-top" onclick="toggleCard('${iso}')">
@@ -1031,6 +1260,7 @@ function buildCardHTML(iso,s){
         <div class="card-name">${patNames}${hasArms?' + Bras':''}</div>
         <div class="card-tags">
           <span class="ctag">${s.duration==='short'?'Court · 1h':'Long · 1h30–2h'}</span>
+          <span class="ctag" style="color:var(--muted)">${cycleLabel}</span>
           ${isUrgent&&!s.done?'<span class="ctag gold">Prioritaire</span>':''}
           ${isToday&&!s.done?'<span class="ctag warn">Aujourd\'hui</span>':''}
           ${s.done?'<span class="ctag ok">Réalisée</span>':''}
@@ -1086,7 +1316,12 @@ function buildCardHTML(iso,s){
               <span class="ex-rest">${rest(ex.cat)}</span>
             </div>
           </div>
-          <button class="ex-alt-btn" onclick="toggleAlts('${uid}')">Alt.</button>
+          <div style="display:flex;gap:.3rem;flex-shrink:0;align-items:flex-start;padding-top:.05rem">
+            <button class="ex-guide-btn" onclick="openLib('${esc(displayName)}')" title="Fiche exercice">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </button>
+            <button class="ex-alt-btn" onclick="toggleAlts('${uid}')">Alt.</button>
+          </div>
         </div>
         <div class="ex-alts-panel" id="alts-${uid}">
           <div class="alt-title">Alternative</div>
@@ -1190,19 +1425,6 @@ function selectAlt(uid,altIdx,name,iso){
   if(nameEl)nameEl.textContent=name;
   const row=document.getElementById('row-'+uid);
   if(row)row.classList.toggle('selected-alt',altIdx!==null);
-}
-
-// ════════════════════════════════════════════════════════
-// ROUTER
-// ════════════════════════════════════════════════════════
-function go(n){
-  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
-  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
-  document.getElementById('scr-'+n).classList.add('on');
-  document.getElementById('nb-'+n).classList.add('on');
-  if(n==='week')renderDayPanel();
-  if(n==='perf')renderPerf();
-  if(n==='stats')renderStats();
 }
 
 // ════════════════════════════════════════════════════════
@@ -1558,8 +1780,481 @@ function checkInstall(){
 }
 
 // ════════════════════════════════════════════════════════
-// INIT
+// LIBRARY — Exercise guide database
 // ════════════════════════════════════════════════════════
+
+// Muscle diagram SVGs — schematic front/back body with colored zones
+function muscleSVG(primary,secondary){
+  // primary / secondary = arrays of muscle zone ids
+  // Zones: chest, front-delt, mid-delt, triceps, biceps, forearm,
+  //        upper-back, lats, rear-delt, traps, core, glutes, quads, hamstrings, calves
+  const colors={
+    primary:'#c9a84c',
+    secondary:'#4caf7d',
+    inactive:'#1e1e1e',
+    outline:'#2a2a2a',
+    skin:'#161616'
+  };
+  function zc(id){
+    if(primary.includes(id))return colors.primary;
+    if(secondary.includes(id))return colors.secondary;
+    return colors.inactive;
+  }
+  // Front view SVG
+  const front=`<svg width="72" height="110" viewBox="0 0 72 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Head -->
+    <ellipse cx="36" cy="8" rx="7" ry="8" fill="${colors.skin}" stroke="${colors.outline}" stroke-width="1"/>
+    <!-- Neck -->
+    <rect x="33" y="15" width="6" height="5" rx="1" fill="${colors.skin}"/>
+    <!-- Traps front -->
+    <path d="M27 20 Q36 17 45 20 L43 26 Q36 23 29 26 Z" fill="${zc('traps')}"/>
+    <!-- Front delts -->
+    <ellipse cx="24" cy="28" rx="5" ry="5" fill="${zc('front-delt')}"/>
+    <ellipse cx="48" cy="28" rx="5" ry="5" fill="${zc('front-delt')}"/>
+    <!-- Chest -->
+    <path d="M29 24 Q36 21 43 24 L44 35 Q36 38 28 35 Z" fill="${zc('chest')}"/>
+    <!-- Core/abs -->
+    <rect x="31" y="36" width="10" height="5" rx="2" fill="${zc('core')}"/>
+    <rect x="31" y="42" width="10" height="5" rx="2" fill="${zc('core')}"/>
+    <rect x="31" y="48" width="10" height="5" rx="2" fill="${zc('core')}"/>
+    <!-- Mid delt -->
+    <ellipse cx="22" cy="34" rx="4" ry="5" fill="${zc('mid-delt')}"/>
+    <ellipse cx="50" cy="34" rx="4" ry="5" fill="${zc('mid-delt')}"/>
+    <!-- Biceps -->
+    <path d="M19 38 Q17 44 18 50 Q22 52 24 50 Q25 44 23 38 Z" fill="${zc('biceps')}"/>
+    <path d="M53 38 Q55 44 54 50 Q50 52 48 50 Q47 44 49 38 Z" fill="${zc('biceps')}"/>
+    <!-- Forearm front -->
+    <path d="M18 51 Q16 58 17 64 Q20 65 22 64 Q23 58 24 51 Z" fill="${zc('forearm')}"/>
+    <path d="M54 51 Q56 58 55 64 Q52 65 50 64 Q49 58 48 51 Z" fill="${zc('forearm')}"/>
+    <!-- Quads -->
+    <path d="M28 56 Q26 68 27 78 Q32 80 34 78 Q35 68 33 56 Z" fill="${zc('quads')}"/>
+    <path d="M44 56 Q46 68 45 78 Q40 80 38 78 Q37 68 39 56 Z" fill="${zc('quads')}"/>
+    <!-- Hip/glute front -->
+    <path d="M28 53 Q36 55 44 53 L44 57 Q36 59 28 57 Z" fill="${zc('glutes')}"/>
+    <!-- Calves front -->
+    <path d="M27 79 Q26 88 27 96 Q30 97 32 96 Q33 88 33 79 Z" fill="${zc('calves')}"/>
+    <path d="M45 79 Q46 88 45 96 Q42 97 40 96 Q39 88 39 79 Z" fill="${zc('calves')}"/>
+    <!-- Triceps hint -->
+    <path d="M21 38 Q19 44 20 50" stroke="${zc('triceps')}" stroke-width="3" stroke-linecap="round"/>
+    <path d="M51 38 Q53 44 52 50" stroke="${zc('triceps')}" stroke-width="3" stroke-linecap="round"/>
+  </svg>`;
+
+  // Back view SVG
+  const back=`<svg width="72" height="110" viewBox="0 0 72 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Head -->
+    <ellipse cx="36" cy="8" rx="7" ry="8" fill="${colors.skin}" stroke="${colors.outline}" stroke-width="1"/>
+    <!-- Neck -->
+    <rect x="33" y="15" width="6" height="5" rx="1" fill="${colors.skin}"/>
+    <!-- Traps -->
+    <path d="M29 19 Q36 16 43 19 L44 27 Q36 24 28 27 Z" fill="${zc('traps')}"/>
+    <!-- Rear delts -->
+    <ellipse cx="23" cy="27" rx="5" ry="5" fill="${zc('rear-delt')}"/>
+    <ellipse cx="49" cy="27" rx="5" ry="5" fill="${zc('rear-delt')}"/>
+    <!-- Upper back / rhomboids -->
+    <path d="M28 24 Q36 21 44 24 L43 33 Q36 35 29 33 Z" fill="${zc('upper-back')}"/>
+    <!-- Lats -->
+    <path d="M26 30 Q23 40 25 50 Q30 52 32 50 Q31 40 29 30 Z" fill="${zc('lats')}"/>
+    <path d="M46 30 Q49 40 47 50 Q42 52 40 50 Q41 40 43 30 Z" fill="${zc('lats')}"/>
+    <!-- Lower back -->
+    <path d="M30 50 Q36 52 42 50 L42 55 Q36 57 30 55 Z" fill="${zc('core')}"/>
+    <!-- Triceps -->
+    <path d="M20 32 Q18 38 19 48 Q23 50 25 48 Q26 38 24 32 Z" fill="${zc('triceps')}"/>
+    <path d="M52 32 Q54 38 53 48 Q49 50 47 48 Q46 38 48 32 Z" fill="${zc('triceps')}"/>
+    <!-- Forearm back -->
+    <path d="M19 49 Q17 57 18 63 Q21 64 23 63 Q24 57 24 49 Z" fill="${zc('forearm')}"/>
+    <path d="M53 49 Q55 57 54 63 Q51 64 49 63 Q48 57 48 49 Z" fill="${zc('forearm')}"/>
+    <!-- Glutes -->
+    <path d="M28 54 Q36 57 44 54 L44 64 Q36 67 28 64 Z" fill="${zc('glutes')}"/>
+    <!-- Hamstrings -->
+    <path d="M28 65 Q26 75 27 80 Q32 82 34 80 Q35 72 33 65 Z" fill="${zc('hamstrings')}"/>
+    <path d="M44 65 Q46 75 45 80 Q40 82 38 80 Q37 72 39 65 Z" fill="${zc('hamstrings')}"/>
+    <!-- Calves back -->
+    <path d="M27 81 Q25 90 26 97 Q30 98 32 97 Q33 90 33 81 Z" fill="${zc('calves')}"/>
+    <path d="M45 81 Q47 90 46 97 Q42 98 40 97 Q39 90 39 81 Z" fill="${zc('calves')}"/>
+    <!-- Mid delt back hint -->
+    <ellipse cx="21" cy="33" rx="3" ry="4" fill="${zc('mid-delt')}"/>
+    <ellipse cx="51" cy="33" rx="3" ry="4" fill="${zc('mid-delt')}"/>
+  </svg>`;
+
+  return `<div class="lib-muscle-wrap">
+    <div class="lib-muscle-svg" style="display:flex;gap:.3rem">
+      <div style="text-align:center">
+        <div style="font-family:var(--fm);font-size:.44rem;color:var(--muted);margin-bottom:.2rem;letter-spacing:.06em">FACE</div>
+        ${front}
+      </div>
+      <div style="text-align:center">
+        <div style="font-family:var(--fm);font-size:.44rem;color:var(--muted);margin-bottom:.2rem;letter-spacing:.06em">DOS</div>
+        ${back}
+      </div>
+    </div>
+    <div class="lib-muscle-legend">
+      <div class="lib-muscle-group">
+        <div class="lib-muscle-label">Primaires</div>
+        <div class="lib-muscle-names lib-muscle-primary">${primary.map(muscleLabel).join(', ')}</div>
+      </div>
+      <div class="lib-muscle-group">
+        <div class="lib-muscle-label">Secondaires</div>
+        <div class="lib-muscle-names lib-muscle-secondary">${secondary.map(muscleLabel).join(', ')}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function muscleLabel(id){
+  const m={
+    'chest':'Pectoraux','front-delt':'Deltoïde ant.','mid-delt':'Deltoïde moy.',
+    'rear-delt':'Deltoïde post.','triceps':'Triceps','biceps':'Biceps',
+    'forearm':'Avant-bras','upper-back':'Rhomboïdes','lats':'Grand dorsal',
+    'traps':'Trapèzes','core':'Abdominaux','glutes':'Fessiers',
+    'quads':'Quadriceps','hamstrings':'Ischio-jambiers','calves':'Mollets'
+  };
+  return m[id]||id;
+}
+
+
+// Exercise demonstration — images hosted on github.com/fterai-cpu/bloc-assets
+// 2 images per exercise: départ (0) and position finale (1)
+function animSVG(name){
+  const BASE='https://raw.githubusercontent.com/fterai-cpu/bloc-assets/main/images/';
+
+  // Map exercise name -> image slug (matches filenames in the repo)
+  const map={
+    'Développé couché barre':'bench-press',
+    'Développé incliné barre 30°':'incline-press',
+    'Développé couché haltères':'bench-press',
+    'Press épaules barre (debout)':'ohp',
+    'Press épaules haltères assis':'ohp',
+    'Dips lestés (buste incliné, pecs)':'dips-chest',
+    'Dips lestés (triceps)':'dips-triceps',
+    'Tractions lestées (prise large)':'pullup',
+    'Tractions prise neutre':'neutral-pullup',
+    'Rowing barre pronation':'row-prono',
+    'Rowing barre supination':'row-supi',
+    'Pull-over poulie haute':'pullover',
+    'Face pull corde (épaules/rhomboïdes)':'face-pull',
+    'Squat barre':'squat',
+    'Soulevé de terre conventionnel':'deadlift',
+    'Soulevé de terre roumain':'rdl',
+    'Fentes marchées haltères':'lunge',
+    'Leg press pieds hauts (largeur épaules)':'leg-press',
+    'Hip thrust barre':'hip-thrust',
+    'Leg curl couché':'leg-curl',
+    'Curl barre droite':'curl-barre',
+    'Curl marteau haltères':'curl-marteau',
+    'Curl incliné haltères':'curl-incline',
+    'Extensions triceps poulie haute (corde)':'triceps-cable',
+    'Extension triceps poulie basse (prise neutre)':'triceps-cable',
+    'Écarté câble prise basse (fly)':'cable-fly',
+    'Écarté câble prise haute':'cable-fly',
+    'Élévations latérales haltères':'lateral-raise',
+    'Curl barre / Extension corde (Superset)':'superset-arms'
+  };
+
+  const slug=map[name]||'bench-press';
+  const img0=`${BASE}${slug}-0.jpg`;
+  const img1=`${BASE}${slug}-1.jpg`;
+  const fallback="data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 140%22><rect width=%22200%22 height=%22140%22 fill=%22%231c1c1c%22/><text x=%22100%22 y=%2266%22 text-anchor=%22middle%22 fill=%22%236b6560%22 font-family=%22monospace%22 font-size=%2210%22>Image non trouvée</text><text x=%22100%22 y=%2284%22 text-anchor=%22middle%22 fill=%22%236b6560%22 font-family=%22monospace%22 font-size=%228%22>Vérifie le repo GitHub</text></svg>";
+
+  return`<div class="lib-anim-wrap">
+    <div class="lib-anim-title">Démonstration — Position de départ et finale</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;padding:.5rem;background:var(--s2);border-radius:12px">
+      <div style="position:relative;background:#f0ebe3;border-radius:8px;overflow:hidden;aspect-ratio:1/1">
+        <img src="${img0}" alt="Position de départ" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy" onerror="this.src='${fallback}'"/>
+        <div style="position:absolute;top:.35rem;left:.35rem;background:rgba(8,8,8,.85);color:var(--gold);font-family:var(--fm);font-size:.48rem;padding:.12rem .4rem;border-radius:3px;letter-spacing:.08em;text-transform:uppercase">Départ</div>
+      </div>
+      <div style="position:relative;background:#f0ebe3;border-radius:8px;overflow:hidden;aspect-ratio:1/1">
+        <img src="${img1}" alt="Position finale" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy" onerror="this.src='${fallback}'"/>
+        <div style="position:absolute;top:.35rem;left:.35rem;background:rgba(8,8,8,.85);color:var(--ok);font-family:var(--fm);font-size:.48rem;padding:.12rem .4rem;border-radius:3px;letter-spacing:.08em;text-transform:uppercase">Fin</div>
+      </div>
+    </div>
+  </div>`;
+}
+// Full exercise library database
+const LIBRARY=[
+  // ─── PUSH ────────────────────────────────────────────
+  {id:'bench-press',pat:'push',name:'Développé couché barre',
+    primary:['chest'],secondary:['front-delt','triceps'],anim:'bench-press',
+    cues:[
+      {t:'Placement des omoplates',d:'<strong>Rétracte et déprime les omoplates</strong> avant de saisir la barre. Imagine que tu essaies de casser la barre en deux vers l\'extérieur.'},
+      {t:'Largeur de prise',d:'Les avant-bras <strong>verticaux au sol</strong> quand la barre touche ta poitrine. Prise trop large = stress épaule. Trop serrée = triceps prioritaire.'},
+      {t:'Arc lombaire contrôlé',d:'Un léger arc est normal et protège les épaules. <strong>Les fesses restent en contact avec le banc.</strong> Si ton dos se cambr trop, réduis la charge.'},
+      {t:'Descente contrôlée',d:'Descends en <strong>2–3 secondes</strong>, barre vers la poitrine basse (mamelons). Pas de rebond sur le sternum.'},
+      {t:'Poussée explosive',d:'Pousse en imaginant <strong>repousser toi du banc</strong>, pas juste soulever la barre. Pied sol, fessiers contractés.'},
+    ]},
+  {id:'incline-press',pat:'push',name:'Développé incliné barre 30°',
+    primary:['chest','front-delt'],secondary:['triceps'],anim:'bench-press',
+    cues:[
+      {t:'Angle du banc',d:'<strong>30° maximum</strong>. Au-delà, c\'est un exercice d\'épaules, pas de pectoraux. 30° cible parfaitement le pec haut.'},
+      {t:'Barre vers le haut du sternum',d:'La barre doit descendre vers la <strong>clavicule / haut du sternum</strong>, pas la poitrine basse comme au couché plat.'},
+      {t:'Omoplate stables',d:'Encore plus important qu\'au plat : bien <strong>rétracter les omoplates</strong> car la position inclinée expose davantage les épaules.'},
+      {t:'Prise légèrement plus serrée',d:'Légèrement plus serrée qu\'au plat pour <strong>maximiser l\'activation pectorale haute</strong>. Les coudes à 60-75° du tronc.'},
+    ]},
+  {id:'dips',pat:'push',name:'Dips lestés (buste incliné, pecs)',
+    primary:['chest'],secondary:['triceps','front-delt'],anim:'default',
+    cues:[
+      {t:'Inclinaison du buste',d:'<strong>Penche le buste vers l\'avant à 20-30°</strong> pour cibler les pectoraux. Buste droit = exercice de triceps.'},
+      {t:'Descente complète',d:'Descends jusqu\'à ce que les <strong>épaules soient sous les coudes</strong>. Amplitude complète = étirement maximal des pecs.'},
+      {t:'Coudes légèrement écartés',d:'Laisse les coudes s\'écarter naturellement (45°). Ne force pas la fermeture des coudes, ça surcharge les épaules.'},
+      {t:'Contrôle de la descente',d:'<strong>3 secondes à la descente minimum</strong>. Le dips leste est brutal sur les épaules si tu te laisses tomber.'},
+    ]},
+  {id:'ohp',pat:'push',name:'Press épaules barre (debout)',
+    primary:['front-delt','mid-delt'],secondary:['triceps','traps','core'],anim:'ohp',
+    cues:[
+      {t:'Placement des pieds',d:'Pieds largeur épaules, <strong>fessiers et abdos gainés</strong>. Le press debout est un exercice de force total-body, pas juste des épaules.'},
+      {t:'Barre au niveau de la gorge',d:'Position de départ : barre sur la <strong>partie haute du sternum / gorge</strong>, coudes légèrement devant la barre.'},
+      {t:'Passer la tête',d:'Quand la barre passe la tête, <strong>rentre la tête entre les bras</strong> et pousse la barre directement au-dessus du crâne. Pas devant.'},
+      {t:'Gainage total',d:'<strong>Pas de cambrure lombaire</strong>. Si tu te cambres pour finir la rep, la charge est trop lourde. Serres les fessiers.'},
+      {t:'Prise légèrement plus large',d:'Prise légèrement plus large que les épaules. Les <strong>poignets dans l\'alignement de l\'avant-bras</strong>, pas cassés en arrière.'},
+    ]},
+
+  // ─── PULL ────────────────────────────────────────────
+  {id:'pullup',pat:'pull',name:'Tractions lestées (prise large)',
+    primary:['lats'],secondary:['biceps','upper-back','rear-delt'],anim:'pullup',
+    cues:[
+      {t:'Activation des dorsaux en premier',d:'Avant de tirer avec les bras, <strong>déprime les épaules</strong> (éloigne-les des oreilles). Sens tes dorsaux s\'activer.'},
+      {t:'Coudes vers les hanches',d:'Imagine <strong>ramener tes coudes vers tes poches</strong>, pas vers le bas. Ça active mieux les dorsaux que "tirer avec les bras".'},
+      {t:'Amplitude complète',d:'Part d\'un <strong>étirement complet en bas</strong> (bras tendus). La moitié des gens ne descend pas assez. C\'est là que le growth se passe.'},
+      {t:'Position du menton',d:'Objectif : <strong>menton au-dessus de la barre</strong> (ou gorge si tu veux aller plus haut). Pas besoin de se casser le cou pour y arriver.'},
+      {t:'Prise pronation',d:'Prise large = plus de dorsaux. <strong>Largeur environ 1,5x les épaules</strong>. Trop large réduit l\'amplitude utile.'},
+    ]},
+  {id:'barbell-row',pat:'pull',name:'Rowing barre pronation',
+    primary:['upper-back','lats'],secondary:['biceps','rear-delt','core'],anim:'rowing',
+    cues:[
+      {t:'Angle du buste',d:'<strong>45° d\'inclinaison</strong> environ, dos droit. Ni trop vertical (deviendrait un shrug) ni trop horizontal (charge lombaire excessive).'},
+      {t:'Barre vers le nombril',d:'La barre remonte vers le <strong>bas de l\'abdomen / nombril</strong> pour maximiser l\'engagement dorsal. Vers la poitrine = trop d\'épaules.'},
+      {t:'Pas de balancement',d:'<strong>Immobilise ton corps</strong>. Si tu dois balancer pour monter la barre, c\'est trop lourd. La force vient du dos, pas de l\'élan.'},
+      {t:'Serrer en haut',d:'<strong>1 seconde de contraction</strong> en position haute. Imagine écraser un crayon entre tes omoplates.'},
+      {t:'Descente lente',d:'Contrôle la descente en <strong>2 secondes</strong>. L\'excentrique est là où tu prends de la masse.'},
+    ]},
+  {id:'supi-row',pat:'pull',name:'Rowing barre supination',
+    primary:['upper-back','biceps'],secondary:['lats','rear-delt'],anim:'rowing',
+    cues:[
+      {t:'Prise supination',d:'Paumes vers le haut (supination). Ça <strong>pre-étire les biceps</strong> et engage plus la partie moyenne du dos que la pronation.'},
+      {t:'Coudes collés au corps',d:'En supination, les coudes <strong>restent proches du buste</strong>. C\'est différent du rowing pronation où les coudes s\'écartent davantage.'},
+      {t:'Même règles de base',d:'Dos plat, gainage, <strong>pas de balancement</strong>. La supination amplifie la charge sur les biceps donc si tu as une gêne au coude, passe en neutre.'},
+    ]},
+  {id:'neutral-pullup',pat:'pull',name:'Tractions prise neutre',
+    primary:['lats','biceps'],secondary:['upper-back','rear-delt'],anim:'pullup',
+    cues:[
+      {t:'Prise neutre = moins de stress',d:'La prise neutre (paumes face à face) est <strong>la position la plus naturelle</strong> pour le poignet, le coude et l\'épaule. Idéale si douleurs en pronation.'},
+      {t:'Plus de biceps',d:'Par rapport à la prise large, la neutre <strong>engage davantage les biceps</strong> et le brachial. Moins de dorsaux purs, plus de bras.'},
+      {t:'Amplitude identique',d:'Mêmes règles : étirement complet en bas, menton au-dessus en haut. <strong>Pas de triche sur l\'amplitude.</strong>'},
+    ]},
+
+  // ─── LEGS ────────────────────────────────────────────
+  {id:'squat',pat:'legs',name:'Squat barre',
+    primary:['quads'],secondary:['glutes','hamstrings','core'],anim:'squat',
+    cues:[
+      {t:'Placement de la barre',d:'Barre sur le <strong>haut du dos (low bar)</strong> ou les trapèzes (high bar). Low bar = plus de postérieur, high bar = plus de quads.'},
+      {t:'Descente : genoux dans l\'axe des orteils',d:'Les genoux <strong>suivent la direction des orteils</strong>. Ni en dedans (valgus) ni trop vers l\'extérieur. C\'est le point de technique n°1.'},
+      {t:'Profondeur',d:'<strong>Cuisse parallèle au sol minimum.</strong> En dessous du parallèle (ass to grass) si ta mobilité le permet — plus de recrutement fessier.'},
+      {t:'Regard horizontal',d:'Ne regarde ni le sol ni le plafond. <strong>Regard horizontal</strong> = colonne neutre. Regarder vers le bas arrondit le bas du dos sous charge.'},
+      {t:'Poussée du sol',d:'Monte en imaginant <strong>écarter le sol sous tes pieds</strong> (abduction externe). Ça active les fessiers et empêche le valgus.'},
+    ]},
+  {id:'deadlift',pat:'legs',name:'Soulevé de terre conventionnel',
+    primary:['hamstrings','glutes','lats'],secondary:['quads','traps','core','forearm'],anim:'deadlift',
+    cues:[
+      {t:'Position de départ',d:'Barre au-dessus des milieux des pieds. <strong>Tibias à 2-3cm de la barre</strong>. Hanches plus hautes que les genoux, épaules légèrement devant la barre.'},
+      {t:'Dos plat = priorité absolue',d:'<strong>Jamais de dos rond sous charge.</strong> Si tu rondes, la charge est trop lourde ou ta mobilité insuffisante. Le risque de blessure lombaire est réel.'},
+      {t:'Engagement des dorsaux',d:'Avant de tirer, <strong>contracte les dorsaux comme pour mettre tes épaules dans les poches arrière</strong>. Ça protège la colonne et crée un trajet de barre optimal.'},
+      {t:'Poussée du sol',d:'Le SDT n\'est pas "tirer la barre vers le haut", c\'est <strong>"pousser le sol vers le bas"</strong>. Ça active les jambes en premier, pas les lombaires.'},
+      {t:'Barre collée au corps',d:'La barre <strong>frôle les tibias et les cuisses</strong> pendant toute la montée. Plus elle s\'éloigne de ton corps, plus le bras de levier lombaire augmente.'},
+    ]},
+  {id:'rdl',pat:'legs',name:'Soulevé de terre roumain',
+    primary:['hamstrings','glutes'],secondary:['lats','core'],anim:'deadlift',
+    cues:[
+      {t:'Genoux légèrement fléchis',d:'<strong>20-30° de flexion</strong> aux genoux, fixes tout au long du mouvement. Le SDT roumain est un exercice d\'étirement des ischio, pas un squat.'},
+      {t:'Hanches en arrière',d:'Descends en <strong>poussant les hanches vers l\'arrière</strong>, pas en fléchissant le dos. Sens l\'étirement dans les ischio-jambiers.'},
+      {t:'Descente limitée par la mobilité',d:'Va aussi bas que tu peux <strong>sans que le dos se rounded</strong>. Pour la plupart des gens c\'est sous le genou. Pas besoin de toucher le sol.'},
+      {t:'Contraction en haut',d:'En remontant, <strong>contracte les fessiers et pousse les hanches vers l\'avant</strong>. Évite de juste "se redresser avec le dos".'},
+    ]},
+  {id:'legpress',pat:'legs',name:'Leg press pieds hauts (largeur épaules)',
+    primary:['quads','glutes'],secondary:['hamstrings'],anim:'leg-press',
+    cues:[
+      {t:'Position des pieds',d:'Pieds <strong>hauts sur la plateforme</strong> = plus de fessiers et ischio. Pieds bas = plus de quads. Largeur épaules = équilibre.'},
+      {t:'Profondeur',d:'Descends jusqu\'à ce que les <strong>genoux soient à 90°</strong> minimum. Plus bas si la machine et ta mobilité le permettent, sans que le dos décolle.'},
+      {t:'Dos contre le dossier',d:'<strong>Dos plaqué contre le dossier</strong> en permanence. Si le bas du dos se décolle en bas du mouvement, tu descends trop.'},
+      {t:'Ne jamais verrouiller les genoux',d:'En haut, <strong>garde une légère flexion</strong> aux genoux. Verrouiller les genoux sous charge c\'est risquer une blessure articulaire.'},
+    ]},
+  {id:'hip-thrust',pat:'legs',name:'Hip thrust barre',
+    primary:['glutes'],secondary:['hamstrings','quads'],anim:'hip-thrust',
+    cues:[
+      {t:'Position du banc',d:'Le banc doit être <strong>sous les omoplates</strong>, pas sous les épaules. Ça permet une amplitude maximale de hanche.'},
+      {t:'Pieds à bonne distance',d:'Tibias <strong>verticaux au sol</strong> en position haute. Si les tibias penchent vers toi, le banc est trop bas. Si vers l\'avant, trop loin.'},
+      {t:'Extension complète',d:'En haut, <strong>corps horizontal au sol</strong>, fessiers complètement contractés. Beaucoup s\'arrêtent trop tôt — pousse jusqu\'au bout.'},
+      {t:'Ne pas cambre le dos',d:'<strong>Rentre le menton</strong> et regarde le plafond, pas l\'horizon. Ça empêche la cambrure lombaire qui "vole" le travail des fessiers.'},
+    ]},
+  {id:'lunge',pat:'legs',name:'Fentes marchées haltères',
+    primary:['quads','glutes'],secondary:['hamstrings','core'],anim:'lunge',
+    cues:[
+      {t:'Longueur du pas',d:'Assez long pour que le <strong>genou avant ne dépasse pas les orteils</strong> de plus de 5cm. Pas trop court non plus (stress genoux).'},
+      {t:'Genou arrière vers le sol',d:'Le genou arrière descend vers le sol sans le toucher, <strong>à 3-5cm du sol</strong>. La jambe arrière fait le travail d\'étirement du fléchisseur de hanche.'},
+      {t:'Buste vertical',d:'<strong>Buste droit, regard horizontal.</strong> Se pencher en avant surcharge les lombaires et réduit l\'activation du quad.'},
+      {t:'Poussée du talon avant',d:'Pour monter, <strong>pousse sur le talon de la jambe avant</strong>. Si tu pousses sur la pointe, tu actives plus le mollet que le quad.'},
+    ]},
+
+  // ─── ARMS ────────────────────────────────────────────
+  {id:'curl',pat:'arms',name:'Curl barre droite',
+    primary:['biceps'],secondary:['forearm','front-delt'],anim:'curl',
+    cues:[
+      {t:'Coudes fixes',d:'<strong>Les coudes ne bougent pas</strong>. Si tes coudes partent vers l\'avant à la montée, c\'est que tu utilises de l\'élan. Coudes ancrés aux flancs.'},
+      {t:'Supination en haut',d:'En position haute, <strong>tourne les poignets</strong> (supination) pour maximiser la contraction du biceps. Tu dois sentir le pic de contraction.'},
+      {t:'Descente complète',d:'Descends <strong>jusqu\'à extension complète</strong>. L\'étirement en bas est capital pour la croissance du biceps.'},
+      {t:'Pas d\'élan',d:'<strong>Pas de balancement du buste.</strong> Si tu dois swinguer, réfèrre-toi à la charge. Le curl est un exercice d\'isolation strict.'},
+    ]},
+  {id:'triceps-ext',pat:'arms',name:'Extensions triceps poulie haute (corde)',
+    primary:['triceps'],secondary:[],anim:'default',
+    cues:[
+      {t:'Coudes fixes et hauts',d:'<strong>Coudes fixés</strong> près du corps, légèrement en avant. Si les coudes partent vers l\'arrière, tu transformes ça en pull-over.'},
+      {t:'Écarter la corde en bas',d:'En bas du mouvement, <strong>écarte les deux brins de la corde</strong> vers l\'extérieur. Ça maximise la contraction du long chef du triceps.'},
+      {t:'Extension complète',d:'Va jusqu\'à la <strong>pleine extension du coude</strong>. Stoppe juste avant le verrouillage articulaire pour garder la tension.'},
+      {t:'Contrôle en remontant',d:'<strong>Freine la remontée</strong> jusqu\'à 90° environ. Ne laisse pas la corde remonter d\'un coup — l\'excentrique est essentiel.'},
+    ]},
+  {id:'superset-arms',pat:'arms',name:'Curl barre / Extension corde (Superset)',
+    primary:['biceps','triceps'],secondary:['forearm'],anim:'curl',
+    cues:[
+      {t:'Principe du superset antagoniste',d:'Tu travailles <strong>deux muscles opposés</strong> (biceps/triceps) sans repos entre. Le repos du biceps pendant que tu fais les triceps — et vice versa.'},
+      {t:'Charge réduite intentionnellement',d:'En superset, <strong>réduis la charge de 15-20%</strong> par rapport à ce que tu ferais en série normale. La fatigue s\'accumule vite.'},
+      {t:'Repos entre supersets',d:'<strong>90 secondes à 2 minutes</strong> entre chaque superset (le pair curl+extension = 1 superset). Pas entre les deux exercices du pair.'},
+      {t:'En fin de séance uniquement',d:'Ce superset est placé <strong>en dernier</strong> dans la séance. Les bras fatigués après les composés ne perturbent pas ta performance sur les gros mouvements.'},
+    ]},
+  {id:'pullover',pat:'pull',name:'Pull-over poulie haute',
+    primary:['lats'],secondary:['chest','triceps'],anim:'default',
+    cues:[
+      {t:'Gainage strict',d:'<strong>Abdos gainés</strong>, buste immobile. Le pull-over est souvent saboté par des mouvements de buste qui transforment ça en extension d\'épaule.'},
+      {t:'Bras légèrement fléchis',d:'<strong>Légère flexion aux coudes</strong> (10-15°), fixe. Bras trop tendus = stress articulaire. Bras trop fléchis = ça devient un triceps.'},
+      {t:'Arc de mouvement complet',d:'Part de <strong>bras au-dessus de la tête</strong> (étirement dorsal) jusqu\'aux hanches. L\'étirement en haut est là où les dorsaux grandissent.'},
+    ]},
+  {id:'face-pull',pat:'pull',name:'Face pull corde (épaules/rhomboïdes)',
+    primary:['rear-delt','upper-back'],secondary:['traps'],anim:'default',
+    cues:[
+      {t:'Hauteur de la poulie',d:'Poulie réglée <strong>au-dessus des yeux</strong>. Pas à hauteur des épaules — ça change le recrutement musculaire.'},
+      {t:'Tirer vers le visage',d:'Ramène la corde <strong>vers le front</strong> avec rotation externe des épaules. Les coudes finissent au niveau des oreilles, voire au-dessus.'},
+      {t:'Contraction en fin de mouvement',d:'<strong>1 seconde de contraction</strong> avec les coudes hauts et les épaules en rotation externe maximale. C\'est là que l\'exercice est efficace.'},
+      {t:'Volume élevé, charge légère',d:'Le face pull est un exercice de <strong>santé épaule</strong>. Privilégie 15+ reps avec charge modérée plutôt que charger lourd avec mauvaise forme.'},
+    ]},
+];
+
+// Build slug from name for lookups
+function exSlug(name){return name.toLowerCase().replace(/[^a-z0-9]/g,'');}
+
+// Find library entry by name (fuzzy)
+function findLibEntry(name){
+  const slug=exSlug(name);
+  return LIBRARY.find(e=>exSlug(e.name)===slug||slug.includes(exSlug(e.name).slice(0,8))||exSlug(e.name).includes(slug.slice(0,8)));
+}
+
+// ─────────────────────────────────────────────────────
+// LIBRARY RENDER
+// ─────────────────────────────────────────────────────
+let libFilter='all';
+let libSearch='';
+let libScrollTarget=null;
+let libPrevScreen='week';
+
+function openLib(exName){
+  libPrevScreen=document.querySelector('.scr.on')?.id?.replace('scr-','')|| 'week';
+  libScrollTarget=exName||null;
+  go('lib');
+}
+
+function closeLib(){
+  go(libPrevScreen);
+}
+
+function filterLib(f,btn){
+  libFilter=f;
+  document.querySelectorAll('.lib-filter').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderLib();
+}
+
+function searchLib(v){
+  libSearch=v;
+  renderLib();
+  if(v) setTimeout(()=>{
+    const first=document.querySelector('.lib-ex');
+    if(first)first.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+
+function renderLib(){
+  const el=document.getElementById('lib-body');
+  if(!el)return;
+  let items=LIBRARY;
+  if(libFilter!=='all')items=items.filter(e=>e.pat===libFilter);
+  if(libSearch){
+    const s=libSearch.toLowerCase();
+    items=items.filter(e=>e.name.toLowerCase().includes(s));
+  }
+  if(!items.length){
+    el.innerHTML=`<div style="text-align:center;padding:3rem 1rem;font-family:var(--fm);font-size:.7rem;color:var(--muted)">Aucun exercice trouvé.</div>`;
+    return;
+  }
+  el.innerHTML=items.map(ex=>buildLibCard(ex)).join('');
+
+  // Scroll to target after render
+  if(libScrollTarget){
+    setTimeout(()=>{
+      const entry=findLibEntry(libScrollTarget);
+      if(entry){
+        const el2=document.getElementById('lib-ex-'+entry.id);
+        if(el2)el2.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+      libScrollTarget=null;
+    },120);
+  }
+}
+
+function buildLibCard(ex){
+  const patColor=ex.pat==='push'?'var(--text2)':ex.pat==='pull'?'var(--ok)':ex.pat==='legs'?'var(--gold)':'#a78bfa';
+  const patLabel={push:'Push',pull:'Pull',legs:'Legs',arms:'Bras'}[ex.pat]||ex.pat;
+  const cues=ex.cues.map((c,i)=>`<div class="lib-cue">
+    <div class="lib-cue-num">${i+1}</div>
+    <div class="lib-cue-text"><strong>${c.t}</strong><br>${c.d}</div>
+  </div>`).join('');
+  return`<div class="lib-ex" id="lib-ex-${ex.id}">
+    <div class="lib-ex-header">
+      <div class="lib-ex-pat" style="background:${patColor}"></div>
+      <div class="lib-ex-info">
+        <div class="lib-ex-name">${ex.name}</div>
+        <div class="lib-ex-tags">
+          <span class="lib-ex-tag" style="color:${patColor};background:${patColor}1a;border:1px solid ${patColor}38">${patLabel}</span>
+          ${ex.primary.map(m=>`<span class="lib-ex-tag primary">${muscleLabel(m)}</span>`).join('')}
+          ${ex.secondary.map(m=>`<span class="lib-ex-tag secondary">${muscleLabel(m)}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+    ${muscleSVG(ex.primary,ex.secondary)}
+    ${animSVG(ex.name)}
+    <div class="lib-cues">
+      <div class="lib-cues-title">Points techniques clés</div>
+      ${cues}
+    </div>
+  </div>`;
+}
+
+// Update go() to handle all screens including lib
+function go(n){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('scr-'+n).classList.add('on');
+  const nb=document.getElementById('nb-'+n);
+  if(nb)nb.classList.add('on');
+  if(n==='week')renderDayPanel();
+  if(n==='perf')renderPerf();
+  if(n==='stats')renderStats();
+  if(n==='lib'){
+    // Reset filter and search on fresh open (not when scrolling to target)
+    if(!libScrollTarget){
+      libFilter='all';libSearch='';
+      document.querySelectorAll('.lib-filter').forEach((b,i)=>b.classList.toggle('on',i===0));
+      const si=document.getElementById('lib-search');if(si)si.value='';
+    }
+    renderLib();
+  }
+}
+
 try{
   buildTimeline();
   renderDayPanel();
