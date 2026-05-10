@@ -553,6 +553,28 @@ body::after{
 .wrow-l{font-size:.76rem}
 .wrow-r{font-family:var(--fm);font-size:.58rem;color:var(--muted)}
 
+/* ─── DATA PANEL (export/import) ─── */
+.data-panel{
+  background:var(--s1);border:1px solid var(--border2);border-radius:var(--r);
+  padding:.88rem;margin-bottom:.75rem;
+  display:flex;align-items:center;justify-content:space-between;gap:.75rem;
+}
+.data-info{flex:1}
+.data-btns{display:flex;gap:.4rem;flex-shrink:0}
+.data-btn{
+  display:flex;align-items:center;gap:.35rem;
+  padding:.42rem .78rem;border-radius:10px;
+  font-family:var(--fd);font-size:.68rem;font-weight:800;
+  letter-spacing:.09em;text-transform:uppercase;
+  border:1px solid var(--border2);background:transparent;
+  color:var(--muted);cursor:pointer;transition:all .14s;
+}
+.data-btn svg{width:12px;height:12px;flex-shrink:0}
+.data-btn:active{background:var(--s2)}
+.data-btn.export{border-color:var(--gold-border);color:var(--gold);background:var(--gold-dim)}
+.data-btn.export:active{background:var(--gold-dim2)}
+.data-btn.import{border-color:var(--ok-border);color:var(--ok);background:var(--ok-dim)}
+
 /* ─── MODAL ─── */
 .ovl{
   display:none;position:fixed;inset:0;z-index:200;
@@ -815,64 +837,132 @@ body::after{
 
 <script>
 // ════════ ROTATIONS ════════
+// ════════════════════════════════════════════════════════
+// EXERCISE DATABASE v10.2
+//
+// SÉANCE COURTE (~55 min) : 2 patterns × [composé + 1 aux]
+//   = 2 exos/pattern, 8–10 séries totales, réaliste
+//
+// SÉANCE LONGUE (~1h20–1h30) : 2 patterns × [composé + 1 aux + 1 vol]
+//   + superset bras SEULEMENT si pas de Legs dans la séance
+//   = 3 exos/pattern + éventuel superset bras
+//
+// LEGS : Squat + SDT uniquement (rotation A/B)
+//   Pas de leg press, hip thrust, leg curl en composé principal
+//   Mollets optionnels en fin si Legs présent
+// ════════════════════════════════════════════════════════
+
 const PUSH_ROTATIONS=[
-  {main:{name:'Développé couché barre',sets:5,reps:'3–5',cat:'strength',alts:[{name:'Développé couché haltères',note:'Amplitude plus grande'},{name:'Smith machine couché',note:'Guidage barre'},{name:'Pompes lestées',note:'Sans banc'}]},
-   aux:{name:'Press épaules barre (debout)',sets:3,reps:'5–7',cat:'strength',alts:[{name:'Press épaules haltères assis',note:'Plus de liberté'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},label:'Horizontal lourd'},
-  {main:{name:'Développé incliné barre 30°',sets:5,reps:'3–5',cat:'strength',alts:[{name:'Développé incliné haltères',note:'Meilleur étirement pectoral'},{name:'Développé incliné machine',note:'Guidé'},{name:'Pompes pieds surélevés',note:'Sans banc'}]},
-   aux:{name:'Press épaules barre (debout)',sets:3,reps:'5–7',cat:'strength',alts:[{name:'Press épaules haltères assis',note:'Plus de liberté'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},label:'Incliné 30°'},
-  {main:{name:'Dips lestés (buste incliné, pecs)',sets:5,reps:'4–6',cat:'strength',alts:[{name:'Développé décliné barre',note:'Si barre de dips indisponible'},{name:'Développé décliné haltères',note:'Amplitude maximale'},{name:'Écarté câble prise haute',note:'Tension constante pec bas'}]},
-   aux:{name:'Press épaules haltères assis',sets:3,reps:'6–8',cat:'strength',alts:[{name:'Press épaules barre debout',note:'Composé classique'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},label:'Décliné / Dips'}
+  // A — Horizontal
+  {main:{name:'Développé couché barre',sets:5,reps:'3–5',cat:'strength',
+    alts:[{name:'Développé couché haltères',note:'Amplitude plus grande'},{name:'Smith machine couché',note:'Guidage barre'},{name:'Pompes lestées',note:'Sans banc'}]},
+   aux:{name:'Press épaules barre (debout)',sets:4,reps:'5–7',cat:'strength',
+    alts:[{name:'Press épaules haltères assis',note:'Plus de liberté'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},
+   vol:{name:'Élévations latérales câble',sets:3,reps:'12–15',cat:'iso',
+    alts:[{name:'Élévations latérales haltères',note:'Version classique'},{name:'Face pull corde',note:'Rotateurs externes'},{name:'Élévations machine',note:'Guidé'}]},
+   label:'Horizontal lourd'},
+  // B — Incliné
+  {main:{name:'Développé incliné barre 30°',sets:5,reps:'3–5',cat:'strength',
+    alts:[{name:'Développé incliné haltères',note:'Meilleur étirement pectoral'},{name:'Développé incliné machine',note:'Guidé'},{name:'Pompes pieds surélevés',note:'Sans banc'}]},
+   aux:{name:'Press épaules haltères assis',sets:4,reps:'6–8',cat:'strength',
+    alts:[{name:'Press épaules barre debout',note:'Composé classique'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},
+   vol:{name:'Écarté câble prise basse (fly)',sets:3,reps:'12–14',cat:'iso',
+    alts:[{name:'Écarté haltères plat',note:'Accessible partout'},{name:'Pec deck machine',note:'Isolation stricte'},{name:'Crossover câble debout',note:'Angle polyvalent'}]},
+   label:'Incliné 30°'},
+  // C — Décliné / Dips
+  {main:{name:'Dips lestés (buste incliné, pecs)',sets:5,reps:'4–6',cat:'strength',
+    alts:[{name:'Développé décliné barre',note:'Si barre de dips indisponible'},{name:'Développé décliné haltères',note:'Amplitude maximale'},{name:'Écarté câble prise haute',note:'Tension constante pec bas'}]},
+   aux:{name:'Press épaules barre (debout)',sets:4,reps:'5–7',cat:'strength',
+    alts:[{name:'Press épaules haltères assis',note:'Plus de liberté'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},
+   vol:{name:'Développé incliné haltères',sets:3,reps:'10–12',cat:'hyper',
+    alts:[{name:'Développé incliné barre',note:'Plus de charge possible'},{name:'Écarté câble prise basse',note:'Tension constante pec bas'},{name:'Pec deck machine',note:'Isolation stricte'}]},
+   label:'Décliné / Dips'}
 ];
+
 const PULL_ROTATIONS=[
-  {main:{name:'Tractions lestées (prise large)',sets:5,reps:'3–5',cat:'strength',alts:[{name:'Tirage poulie haute prise large',note:'Charge ajustable'},{name:'Tractions assistées machine',note:'Version allégée'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'}]},
-   aux:{name:'Rowing barre pronation',sets:3,reps:'5–7',cat:'strength',alts:[{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Rowing machine chest-supported',note:'Enlève charge lombaire'},{name:'Tirage horizontal câble',note:'Tension constante'}]},label:'Vertical prise large'},
-  {main:{name:'Rowing barre supination',sets:5,reps:'4–6',cat:'strength',alts:[{name:'Rowing haltère unilatéral',note:'Unilatéral'},{name:'Smith machine rowing',note:'Trajectoire fixe'},{name:'Tirage câble serrée',note:'Tension constante'}]},
-   aux:{name:'Tractions prise neutre',sets:3,reps:'5–7',cat:'strength',alts:[{name:'Tirage poulie haute prise neutre',note:'Charge ajustable'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'},{name:'Rowing T-bar',note:'Alternative'}]},label:'Rowing horizontal'},
-  {main:{name:'Tractions prise neutre',sets:5,reps:'3–5',cat:'strength',alts:[{name:'Tirage poulie haute prise neutre',note:'Charge ajustable'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'},{name:'Rowing T-bar',note:'Alternative'}]},
-   aux:{name:'Rowing barre pronation',sets:3,reps:'5–7',cat:'strength',alts:[{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Rowing machine chest-supported',note:'Enlève charge lombaire'},{name:'Tirage horizontal câble',note:'Tension constante'}]},label:'Prise neutre'}
+  // A — Vertical prise large
+  {main:{name:'Tractions lestées (prise large)',sets:5,reps:'3–5',cat:'strength',
+    alts:[{name:'Tirage poulie haute prise large',note:'Charge ajustable'},{name:'Tractions assistées machine',note:'Version allégée'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'}]},
+   aux:{name:'Rowing barre pronation',sets:4,reps:'5–7',cat:'strength',
+    alts:[{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Rowing machine chest-supported',note:'Enlève charge lombaire'},{name:'Tirage horizontal câble',note:'Tension constante'}]},
+   vol:{name:'Face pull corde',sets:3,reps:'15',cat:'iso',
+    alts:[{name:'Oiseau haltères assis',note:'Sans poulie'},{name:'Tirage horizontal câble prise large',note:'Accent rhomboïdes'},{name:'Rowing machine prise large',note:'Version guidée'}]},
+   label:'Vertical prise large'},
+  // B — Rowing supination
+  {main:{name:'Rowing barre supination',sets:5,reps:'4–6',cat:'strength',
+    alts:[{name:'Rowing haltère unilatéral',note:'Unilatéral'},{name:'Smith machine rowing',note:'Trajectoire fixe'},{name:'Tirage câble serrée',note:'Tension constante'}]},
+   aux:{name:'Tractions prise neutre',sets:4,reps:'5–7',cat:'strength',
+    alts:[{name:'Tirage poulie haute prise neutre',note:'Charge ajustable'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'},{name:'Rowing T-bar',note:'Alternative'}]},
+   vol:{name:'Pull-over poulie haute',sets:3,reps:'10–12',cat:'hyper',
+    alts:[{name:'Pull-over haltère couché',note:'Liberté de mouvement'},{name:'Pull-over câble basse poulie',note:'Angle inversé'},{name:'Tirage poulie basse prise large',note:'Alternative'}]},
+   label:'Rowing horizontal'},
+  // C — Prise neutre
+  {main:{name:'Tractions prise neutre',sets:5,reps:'3–5',cat:'strength',
+    alts:[{name:'Tirage poulie haute prise neutre',note:'Charge ajustable'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'},{name:'Rowing T-bar',note:'Alternative'}]},
+   aux:{name:'Rowing barre pronation',sets:4,reps:'5–7',cat:'strength',
+    alts:[{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Rowing machine chest-supported',note:'Enlève charge lombaire'},{name:'Tirage horizontal câble',note:'Tension constante'}]},
+   vol:{name:'Tirage horizontal câble (prise serrée)',sets:3,reps:'10–12',cat:'hyper',
+    alts:[{name:'Rowing machine prise serrée',note:'Guidé'},{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Pull-over câble basse poulie',note:'Grand dorsal bas'}]},
+   label:'Prise neutre'}
 ];
+
+// LEGS : uniquement Squat + SDT, rotation A/B
+// Pas de leg press ni hip thrust ici — trop long, redondant, double-hop
 const LEGS_ROTATIONS=[
-  {main:{name:'Squat barre',sets:5,reps:'3–5',cat:'strength',alts:[{name:'Hack squat machine',note:'Si rack indisponible'},{name:'Leg press pieds hauts',note:'Moins de compression spinale'},{name:'Goblet squat haltère',note:'Mobilité'}]},
-   aux:{name:'Soulevé de terre roumain',sets:3,reps:'6–8',cat:'strength',alts:[{name:'Hip thrust barre',note:'Focus fessiers'},{name:'Good morning',note:'Renforcement postérieur'},{name:'Leg curl couché',note:'Isolation ischio'}]},label:'Squat + SDT roumain'},
-  {main:{name:'Squat barre',sets:5,reps:'3–5',cat:'strength',alts:[{name:'Hack squat machine',note:'Si rack indisponible'},{name:'Leg press pieds hauts',note:'Moins de compression spinale'},{name:'Goblet squat',note:'Mobilité'}]},
-   aux:{name:'Soulevé de terre conventionnel',sets:4,reps:'3–5',cat:'strength',alts:[{name:'Soulevé de terre sumo',note:'Placement plus large'},{name:'Trap bar deadlift',note:'Plus sécurisé'},{name:'SDT roumain',note:'Accent ischio'}]},label:'Squat + SDT conventionnel'},
-  {main:{name:'Leg press pieds hauts (largeur épaules)',sets:5,reps:'6–8',cat:'strength',alts:[{name:'Hack squat machine',note:'Similaire, position debout'},{name:'Squat barre',note:'Si leg press indisponible'},{name:'Leg press pieds serrés',note:'Accent vaste externe'}]},
-   aux:{name:'Hip thrust barre',sets:4,reps:'6–8',cat:'strength',alts:[{name:'Hip thrust haltère unilatéral',note:'Si barre indisponible'},{name:'Glute bridge au sol',note:'Sans matériel'},{name:'SDT roumain',note:'Si banc indisponible'}]},label:'Leg press + Hip thrust'}
+  // A — Squat + SDT roumain (ischio/fessiers dominants)
+  {main:{name:'Squat barre',sets:5,reps:'3–5',cat:'strength',
+    alts:[{name:'Hack squat machine',note:'Si rack indisponible'},{name:'Goblet squat haltère',note:'Mobilité / débutant'},{name:'Leg press pieds hauts',note:'Moins de compression spinale'}]},
+   aux:{name:'Soulevé de terre roumain',sets:4,reps:'5–7',cat:'strength',
+    alts:[{name:'Good morning barre',note:'Renforcement postérieur'},{name:'Leg curl couché',note:'Isolation ischio'},{name:'Hip thrust barre',note:'Focus fessiers'}]},
+   vol:{name:'Mollets debout (machine ou barre)',sets:3,reps:'12–15',cat:'iso',
+    alts:[{name:'Mollets assis (soleus)',note:'Accent sur le soleus'},{name:'Mollets unijambiste haltère',note:'Unilatéral'},{name:'Mollets à la presse',note:'Charge ajustable'}]},
+   label:'Squat + SDT roumain'},
+  // B — Squat + SDT conventionnel (global, plus lourd)
+  {main:{name:'Squat barre',sets:5,reps:'3–5',cat:'strength',
+    alts:[{name:'Hack squat machine',note:'Si rack indisponible'},{name:'Goblet squat',note:'Mobilité'},{name:'Leg press pieds hauts',note:'Alternative'}]},
+   aux:{name:'Soulevé de terre conventionnel',sets:4,reps:'3–5',cat:'strength',
+    alts:[{name:'Soulevé de terre sumo',note:'Placement plus large'},{name:'Trap bar deadlift',note:'Plus sécurisé dos'},{name:'SDT roumain',note:'Si lombaires fatigués'}]},
+   vol:{name:'Mollets debout (machine ou barre)',sets:3,reps:'12–15',cat:'iso',
+    alts:[{name:'Mollets assis (soleus)',note:'Accent sur le soleus'},{name:'Mollets unijambiste haltère',note:'Unilatéral'},{name:'Mollets à la presse',note:'Charge ajustable'}]},
+   label:'Squat + SDT conventionnel'}
 ];
-const PUSH_VOL=[
-  {name:'Élévations latérales câble',sets:3,reps:'12–15',cat:'iso',alts:[{name:'Élévations latérales haltères',note:'Version classique'},{name:'Face pull corde',note:'Rotateurs externes'},{name:'Élévations machine',note:'Guidé'}]},
-  {name:'Développé incliné haltères',sets:3,reps:'10–12',cat:'hyper',alts:[{name:'Développé incliné barre',note:'Plus de charge possible'},{name:'Écarté câble prise basse',note:'Tension constante pec bas'},{name:'Pec deck machine',note:'Isolation stricte'}]},
-  {name:'Écarté câble prise basse (fly)',sets:3,reps:'12–14',cat:'iso',alts:[{name:'Écarté haltères plat',note:'Accessible partout'},{name:'Pec deck machine',note:'Isolation stricte'},{name:'Crossover câble debout',note:'Angle polyvalent'}]}
-];
-const PULL_VOL=[
-  {name:'Pull-over poulie haute',sets:3,reps:'10–12',cat:'hyper',alts:[{name:'Pull-over haltère couché',note:'Liberté de mouvement'},{name:'Pull-over câble basse poulie',note:'Angle inversé'},{name:'Tirage poulie basse prise large',note:'Alternative'}]},
-  {name:'Face pull corde',sets:3,reps:'15',cat:'iso',alts:[{name:'Oiseau haltères assis',note:'Sans poulie'},{name:'Tirage horizontal câble prise large',note:'Accent rhomboïdes'},{name:'Rowing machine prise large',note:'Version guidée'}]},
-  {name:'Tirage horizontal câble (prise serrée)',sets:3,reps:'10–12',cat:'hyper',alts:[{name:'Rowing machine prise serrée',note:'Guidé'},{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Pull-over câble basse poulie',note:'Grand dorsal bas'}]}
-];
-const LEGS_VOL=[
-  {name:'Fentes marchées haltères',sets:3,reps:'10/jambe',cat:'hyper',alts:[{name:'Split squat bulgare',note:'Plus de charge'},{name:'Step-up box',note:'Unilatéral doux'},{name:'Fentes statiques barre',note:'Plus stable'}]},
-  {name:'Leg curl couché',sets:3,reps:'10–12',cat:'hyper',alts:[{name:'Leg curl assis',note:'Plus grand étirement'},{name:'Leg curl debout unilatéral',note:'Unilatéral'},{name:'Hip thrust barre',note:'Fessiers + ischio'}]},
-  {name:'Hip thrust barre',sets:3,reps:'10–12',cat:'hyper',alts:[{name:'Hip thrust haltère unilatéral',note:'Si barre indisponible'},{name:'Glute bridge',note:'Sans matériel'},{name:'SDT roumain',note:'Variation'}]}
-];
-const ARMS_LONG=[
-  {name:'Curl barre / Extension corde (Superset)',sets:2,reps:'10–12',cat:'iso',alts:[{name:'Curl EZ-bar / Skull crusher',note:'Moins de stress poignets'},{name:'Curl haltères / Dips bancs',note:'Si poulie indisponible'},{name:'Curl câble / Extension poulie basse',note:'Tension constante'}]}
+// Legs rotation = 2 cycles (A/B), pas 3
+const LEGS_ROTATION_COUNT=2;
+
+const ARMS_SUPERSET=[
+  {name:'Curl barre / Extension corde (Superset)',sets:2,reps:'10–12',cat:'iso',
+    alts:[{name:'Curl EZ-bar / Skull crusher',note:'Moins de stress poignets'},{name:'Curl haltères / Dips bancs',note:'Si poulie indisponible'},{name:'Curl câble / Extension poulie basse',note:'Tension constante'}]}
 ];
 
 function getPatternRotationIdx(pat){
+  const total=pat==='legs'?LEGS_ROTATION_COUNT:3;
   let count=0;
   Object.values(ST.sessions).forEach(s=>{if(s.done&&s.patterns&&s.patterns.includes(pat))count++;});
-  return count%3;
+  return count%total;
 }
+
+// ════════════════════════════════════════════════════════
+// SÉANCE COURTE  (~55 min)
+//   2 patterns prioritaires × [main + aux]
+//   = 9 séries totales/pattern, transitions incluses
+//
+// SÉANCE LONGUE  (~1h20–1h30)
+//   2 patterns prioritaires × [main + aux + vol]
+//   + superset bras UNIQUEMENT si Legs absent (sinon trop long)
+// ════════════════════════════════════════════════════════
 function getRotationExos(pat,duration){
   const idx=getPatternRotationIdx(pat);
-  let rotations,vol;
-  if(pat==='push'){rotations=PUSH_ROTATIONS;vol=PUSH_VOL;}
-  else if(pat==='pull'){rotations=PULL_ROTATIONS;vol=PULL_VOL;}
-  else{rotations=LEGS_ROTATIONS;vol=LEGS_VOL;}
-  const rot=rotations[idx];
-  if(duration==='short')return{exos:[rot.main,rot.aux],angle:rot.label};
-  const v1=vol[idx%vol.length];const v2=vol[(idx+1)%vol.length];
-  return{exos:[rot.main,rot.aux,v1,v2],angle:rot.label};
+  let rot;
+  if(pat==='push')rot=PUSH_ROTATIONS[idx];
+  else if(pat==='pull')rot=PULL_ROTATIONS[idx];
+  else rot=LEGS_ROTATIONS[idx];
+
+  if(duration==='short'){
+    return{exos:[rot.main,rot.aux],angle:rot.label};
+  }else{
+    // Long : main + aux + vol
+    return{exos:[rot.main,rot.aux,rot.vol],angle:rot.label};
+  }
 }
 
 function rest(cat){
@@ -926,9 +1016,25 @@ function debtStatus(days){if(days>=5)return'urgent';if(days>=3)return'ok';return
 function debtLabel(days){if(days===999)return'—';if(days===0)return'Auj.';if(days===1)return'J-1';return`J-${days}`;}
 function getPriorityPatterns(duration){const last=getLastWorked();const scored=PATS.map(p=>({p,days:daysSince(last[p])}));scored.sort((a,b)=>b.days-a.days);return duration==='short'?scored.slice(0,2).map(x=>x.p):scored.map(x=>x.p);}
 function generateSession(s){
-  const patterns=getPriorityPatterns(s.duration);const isShort=s.duration==='short';const fadj=FAT[s.fatigue||2];const out=[];
-  patterns.forEach(pat=>{const{exos,angle}=getRotationExos(pat,s.duration);const processed=exos.map((ex,ei)=>({...ex,sets:ei===0?Math.max(2,ex.sets+fadj.mod):ex.sets}));out.push({pat,angle,exos:processed});});
-  if(!isShort)out.push({pat:'arms',angle:'Superset antagoniste',exos:ARMS_LONG.map(e=>({...e}))});
+  const patterns=getPriorityPatterns(s.duration);
+  const isShort=s.duration==='short';
+  const fadj=FAT[s.fatigue||2];
+  const out=[];
+  patterns.forEach(pat=>{
+    const{exos,angle}=getRotationExos(pat,s.duration);
+    const processed=exos.map((ex,ei)=>({
+      ...ex,
+      // fatigue mod applies only to main compound (ei===0)
+      sets:ei===0?Math.max(2,ex.sets+fadj.mod):ex.sets
+    }));
+    out.push({pat,angle,exos:processed});
+  });
+  // Superset bras UNIQUEMENT si pas de Legs dans la séance
+  // (après legs squat+SDT, les bras sont inutiles — trop fatiguant et hors-sujet)
+  const hasLegs=patterns.includes('legs');
+  if(!isShort&&!hasLegs){
+    out.push({pat:'arms',angle:'Superset antagoniste',exos:ARMS_SUPERSET.map(e=>({...e}))});
+  }
   return out;
 }
 
@@ -1006,10 +1112,26 @@ function onDragMove(e){if(!tlDragging)return;if(e.type==='touchmove')e.preventDe
 function onDragEnd(){if(!tlDragging)return;tlDragging=false;document.getElementById('day-track').classList.remove('dragging');snapToDay();}
 
 // ════════ DAY PANEL ════════
+function shouldRecommendRest(){
+  // Repos recommandé si : 3+ séances dans les 7 derniers jours
+  // ET aucun pattern en dette urgente (≥5j)
+  const todayIso=isoToday();const last=getLastWorked();
+  const urgentExists=PATS.some(p=>daysSince(last[p])>=5);
+  if(urgentExists)return false;// priorité à la séance
+  let recentCount=0;
+  for(let i=1;i<=7;i++){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const iso=isoDate(d);
+    if(ST.sessions[iso]?.done)recentCount++;
+  }
+  return recentCount>=3;
+}
+
 function renderDayPanel(){
   const el=document.getElementById('day-panel');const iso=tlSelectedIso;const todayIso=isoToday();
   const d=dateFromIso(iso);const dayOfWeek=d.getDay()===0?6:d.getDay()-1;
   const isPast=iso<todayIso;const isToday=iso===todayIso;const s=getSession(iso);const last=getLastWorked();
+  const restRec=isToday&&!s&&shouldRecommendRest();
 
   let debtHtml=`<div class="debt-grid" id="debt-grid-panel">`;
   PATS.forEach((pat,i)=>{
@@ -1034,17 +1156,27 @@ function renderDayPanel(){
   if(!isPast||s)html+=debtHtml;
   if(s){html+=buildCardHTML(iso,s);}
   else{
+    // Repos recommandé — banner discret au-dessus du planificateur
+    if(restRec){
+      html+=`<div style="background:var(--ok-dim);border:1px solid var(--ok-border);border-radius:var(--r);padding:.75rem 1rem;margin-bottom:.65rem;display:flex;align-items:center;gap:.65rem">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <div>
+          <div style="font-family:var(--fd);font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--ok)">Repos recommandé</div>
+          <div style="font-family:var(--fm);font-size:.56rem;color:var(--muted);margin-top:.1rem">3+ séances cette semaine · Aucun pattern urgent</div>
+        </div>
+      </div>`;
+    }
     html+=`<div class="add-session-panel">
       <div class="add-session-title">${isPast?'Ajouter une séance passée':'Planifier une séance'}</div>
       <div class="dur-row">
-        <div class="dur-opt short" onclick="addSession('${iso}','short')">Court<small>~1h · Force pure</small></div>
-        <div class="dur-opt full" onclick="addSession('${iso}','full')">Long<small>1h30–1h40 · Force + vol.</small></div>
+        <div class="dur-opt short" onclick="addSession('${iso}','short')">Court<small>~55 min · Force pure</small></div>
+        <div class="dur-opt full" onclick="addSession('${iso}','full')">Long<small>~1h20–1h30 · Force + vol.</small></div>
       </div>
     </div>
     <div class="tempty" style="padding:1.25rem 0">
       <svg class="tempty-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
       <div class="tempty-title">Repos</div>
-      <div class="tempty-sub">${isPast?'Aucune séance enregistrée ce jour.':'Aucune séance planifiée.'}</div>
+      <div class="tempty-sub">${isPast?'Aucune séance enregistrée ce jour.':restRec?'Ton corps a mérité ça.':'Aucune séance planifiée.'}</div>
     </div>`;
   }
   el.innerHTML=html;
@@ -1278,6 +1410,7 @@ function renderStats(){
   const topLifts=Object.entries(bestLifts).sort((a,b)=>b[1]-a[1]).slice(0,5);
   let streak=0;const todayIso=isoToday();let checkDate=new Date();
   while(true){const iso=isoDate(checkDate);if(iso>todayIso){checkDate.setDate(checkDate.getDate()-1);continue;}if(ST.sessions[iso]?.done)streak++;else if(iso===todayIso){}else break;checkDate.setDate(checkDate.getDate()-1);if(streak>365)break;}
+  const backupInfo=getBackupInfo();
   document.getElementById('stats-sub').textContent=`${done.length} séance${done.length!==1?'s':''} au total`;
   document.getElementById('stats-body').innerHTML=`
     <div class="stat-grid">
@@ -1291,7 +1424,78 @@ function renderStats(){
     <div class="week-list">
       ${!done.length?'<div class="wrow"><div class="wrow-l" style="color:var(--muted)">Aucune séance réalisée</div></div>':''}
       ${Object.entries(ST.sessions).filter(([,s])=>s?.done).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,12).map(([iso,s])=>{const d=dateFromIso(iso);const pats=(s.patterns||PATS).map(p=>PLBL[p]).join('+');return`<div class="wrow"><div class="wrow-l">${d.getDate()} ${MONTHS[d.getMonth()].slice(0,3)}. · ${pats}</div><div class="wrow-r">${s.duration==='short'?'Court':'Long'}</div></div>`;}).join('')}
+    </div>
+    <div class="slbl">Données</div>
+    <div class="data-panel">
+      <div class="data-info">
+        <div style="font-family:var(--fm);font-size:.58rem;color:var(--text2)">${done.length} séances · ${perf.length} logs de charge</div>
+        <div style="font-family:var(--fm);font-size:.5rem;color:var(--muted);margin-top:.2rem">${backupInfo?'Backup auto · '+backupInfo:'Aucun backup auto'}</div>
+      </div>
+      <div class="data-btns">
+        <button class="data-btn export" onclick="exportData()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Exporter
+        </button>
+        <label class="data-btn import">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Importer
+          <input type="file" accept=".json" style="display:none" onchange="importData(this)"/>
+        </label>
+      </div>
     </div>`;
+}
+
+// ════════ EXPORT / IMPORT / BACKUP ════════
+function exportData(){
+  const now=new Date();
+  const filename=`bloc-backup-${isoDate(now)}.json`;
+  const data=JSON.stringify({...ST,exportedAt:now.toISOString(),version:'10.2'},null,2);
+  const blob=new Blob([data],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=filename;a.click();
+  URL.revokeObjectURL(url);
+  showToast('Exporté : '+filename);
+  // Save backup timestamp
+  autoBackup();
+}
+
+function importData(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      if(!data.sessions||typeof data.sessions!=='object')throw new Error('Format invalide');
+      // Merge: keep existing perf + sessions, overwrite with imported
+      const merged={
+        sessions:{...ST.sessions,...data.sessions},
+        perf:[...(ST.perf||[]),...(data.perf||[]).filter(p=>!(ST.perf||[]).some(q=>q.id===p.id))]
+      };
+      ST=merged;persist();
+      buildTimeline();renderDayPanel();go('stats');
+      showToast(`Importé · ${Object.keys(data.sessions).length} séances`);
+    }catch(err){showToast('Fichier invalide');}
+  };
+  reader.readAsText(file);
+  input.value='';// reset input
+}
+
+function autoBackup(){
+  // Stores a lightweight backup in localStorage with timestamp
+  try{
+    const ts=new Date().toISOString();
+    localStorage.setItem('bloc8_backup',JSON.stringify({...ST,backedUpAt:ts}));
+    localStorage.setItem('bloc8_backup_ts',ts);
+  }catch(e){}
+}
+
+function getBackupInfo(){
+  try{
+    const ts=localStorage.getItem('bloc8_backup_ts');
+    if(!ts)return null;
+    const d=new Date(ts);
+    return`${d.getDate()} ${MONTHS[d.getMonth()].slice(0,3)}. ${d.getHours()}h${String(d.getMinutes()).padStart(2,'0')}`;
+  }catch(e){return null;}
 }
 
 // ════════ MODAL ════════
@@ -2295,6 +2499,9 @@ function go(n){
   if(n==='stats')renderStats();
   if(n==='lib'){if(!libScrollTarget){libFilter='all';libSearch='';document.querySelectorAll('.lib-filter').forEach((b,i)=>b.classList.toggle('on',i===0));const si=document.getElementById('lib-search');if(si)si.value='';}renderLib();}
 }
+
+// Auto-backup on every app load (silent, keeps last snapshot)
+try{autoBackup();}catch(e){}
 
 // Run auto-validation for past unvalidated sessions BEFORE building UI
 try{
