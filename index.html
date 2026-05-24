@@ -731,6 +731,380 @@ body::after{
   position:absolute;bottom:.4rem;right:.55rem;
   font-family:var(--fm);font-size:.44rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILITY PAGE — Palette zen (sauge / écume / ivoire chaud)
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --mob-bg:#0a0d0c;
+  --mob-s1:#0e1211;
+  --mob-s2:#131918;
+  --mob-s3:#181f1d;
+  --mob-border:#1e2624;
+  --mob-border2:#28322f;
+  --mob-text:#e8e4d8;
+  --mob-muted:#7a857f;
+  /* Accent sauge — calme, organique, peu saturé */
+  --mob-accent:#8aae9c;
+  --mob-accent2:#a8c4b5;
+  --mob-accent-dim:rgba(138,174,156,.08);
+  --mob-accent-dim2:rgba(138,174,156,.16);
+  --mob-accent-border:rgba(138,174,156,.22);
+  --mob-accent-glow:rgba(138,174,156,.14);
+  /* Accents secondaires par bloc */
+  --mob-b1:#c4b896; /* warm-up ivoire */
+  --mob-b2:#8aae9c; /* legs sauge */
+  --mob-b3:#9ab2c4; /* upper bleu doux */
+  --mob-b4:#b8a8c0; /* core lavande */
+  --mob-b5:#d4c4a8; /* cool-down sable */
+}
+
+/* Conteneur global mobilité — applique la palette zen */
+#scr-mob{--bg:var(--mob-bg)}
+#scr-mob .scr-inner{padding-top:.5rem}
+
+/* Header mobilité */
+.mob-header{
+  padding:1.2rem 1.125rem .8rem;
+  position:relative;
+}
+.mob-eyebrow{
+  font-family:var(--fm);font-size:.5rem;color:var(--mob-muted);
+  letter-spacing:.18em;text-transform:uppercase;margin-bottom:.4rem;
+}
+.mob-title{
+  font-family:var(--fd);font-size:1.85rem;font-weight:700;color:var(--mob-text);
+  letter-spacing:.01em;line-height:1;margin-bottom:.35rem;
+}
+.mob-title span{color:var(--mob-accent);font-weight:400;font-style:italic}
+.mob-sub{
+  font-family:var(--fb);font-size:.78rem;color:var(--mob-muted);font-weight:300;
+}
+
+/* Carte synthèse séance */
+.mob-overview{
+  margin:.4rem 1.125rem 1rem;
+  background:linear-gradient(180deg,var(--mob-s2) 0%,var(--mob-s1) 100%);
+  border:1px solid var(--mob-border);border-radius:14px;
+  padding:1rem 1.1rem;position:relative;overflow:hidden;
+}
+.mob-overview::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--mob-accent-border),transparent);
+}
+.mob-ov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-bottom:.9rem}
+.mob-ov-cell{text-align:center}
+.mob-ov-val{font-family:var(--fd);font-size:1.25rem;font-weight:700;color:var(--mob-text);line-height:1}
+.mob-ov-val span{color:var(--mob-accent)}
+.mob-ov-lbl{font-family:var(--fm);font-size:.46rem;color:var(--mob-muted);letter-spacing:.12em;text-transform:uppercase;margin-top:.25rem}
+
+.mob-start-btn{
+  width:100%;background:var(--mob-accent);color:#0a0d0c;
+  font-family:var(--fd);font-size:.95rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  border:none;border-radius:10px;padding:.85rem;cursor:pointer;
+  transition:all .2s;
+}
+.mob-start-btn:hover{background:var(--mob-accent2);transform:translateY(-1px)}
+.mob-start-btn:active{transform:translateY(0)}
+
+/* Cartes de bloc (preview) */
+.mob-block{
+  margin:0 1.125rem .7rem;
+  background:var(--mob-s2);
+  border:1px solid var(--mob-border);
+  border-radius:12px;
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.mob-block.expanded{border-color:var(--mob-accent-border)}
+.mob-block-head{
+  padding:.85rem 1rem;display:flex;align-items:center;gap:.75rem;cursor:pointer;
+  background:var(--mob-s2);
+  border-bottom:1px solid transparent;
+  transition:background .15s, border-color .15s;
+}
+.mob-block.expanded .mob-block-head{border-bottom-color:var(--mob-border)}
+.mob-block-head:hover{background:var(--mob-s3)}
+.mob-block-dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+  box-shadow:0 0 12px currentColor;
+}
+.mob-block-info{flex:1;min-width:0}
+.mob-block-title{
+  font-family:var(--fd);font-size:.92rem;font-weight:700;color:var(--mob-text);
+  letter-spacing:.02em;line-height:1.1;
+}
+.mob-block-meta{
+  font-family:var(--fm);font-size:.48rem;color:var(--mob-muted);
+  letter-spacing:.1em;text-transform:uppercase;margin-top:.18rem;
+}
+.mob-block-chev{
+  width:14px;height:14px;color:var(--mob-muted);transition:transform .25s;
+  flex-shrink:0;
+}
+.mob-block.expanded .mob-block-chev{transform:rotate(180deg);color:var(--mob-accent)}
+
+.mob-block-body{
+  max-height:0;overflow:hidden;transition:max-height .3s ease;
+}
+.mob-block.expanded .mob-block-body{max-height:1200px}
+
+.mob-ex-list{padding:.4rem .6rem .7rem}
+.mob-ex-row{
+  display:flex;align-items:center;gap:.6rem;
+  padding:.55rem .5rem;border-radius:8px;
+  transition:background .15s;
+}
+.mob-ex-row + .mob-ex-row{border-top:1px solid var(--mob-border)}
+.mob-ex-num{
+  font-family:var(--fm);font-size:.5rem;color:var(--mob-muted);
+  letter-spacing:.05em;min-width:1.8rem;
+}
+.mob-ex-content{flex:1;min-width:0}
+.mob-ex-name{
+  font-family:var(--fb);font-size:.78rem;color:var(--mob-text);font-weight:500;
+  line-height:1.2;margin-bottom:.15rem;
+}
+.mob-ex-name em{color:var(--mob-accent);font-style:normal;font-size:.55rem;font-family:var(--fm);letter-spacing:.08em;text-transform:uppercase;margin-left:.4rem}
+.mob-ex-format{
+  font-family:var(--fm);font-size:.55rem;color:var(--mob-muted);
+  letter-spacing:.04em;
+}
+.mob-ex-cue{
+  font-family:var(--fb);font-size:.65rem;color:var(--mob-muted);
+  font-style:italic;margin-top:.25rem;line-height:1.3;
+}
+
+/* ─── MODE SESSION ACTIVE (timer guidé) ─── */
+.mob-session-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:var(--mob-bg);
+  display:none;flex-direction:column;
+  padding:var(--st) 0 var(--sb);
+}
+.mob-session-overlay.on{display:flex;animation:fadeIn .25s}
+
+.mob-sess-top{
+  padding:1rem 1.125rem .8rem;
+  border-bottom:1px solid var(--mob-border);
+  display:flex;align-items:center;gap:.8rem;
+}
+.mob-sess-close{
+  background:none;border:1px solid var(--mob-border2);border-radius:50%;
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+  color:var(--mob-muted);cursor:pointer;flex-shrink:0;
+  transition:all .15s;
+}
+.mob-sess-close:hover{color:var(--mob-text);border-color:var(--mob-accent)}
+.mob-sess-close svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+.mob-sess-progress-wrap{flex:1}
+.mob-sess-progress-label{
+  font-family:var(--fm);font-size:.5rem;color:var(--mob-muted);
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:.3rem;
+  display:flex;justify-content:space-between;
+}
+.mob-sess-progress-label span{color:var(--mob-accent)}
+.mob-sess-progress-bar{
+  height:3px;background:var(--mob-s3);border-radius:2px;overflow:hidden;
+}
+.mob-sess-progress-fill{
+  height:100%;background:var(--mob-accent);
+  transition:width .4s cubic-bezier(.4,0,.2,1);
+}
+
+.mob-sess-body{
+  flex:1;overflow-y:auto;
+  padding:1.5rem 1.125rem 1rem;
+}
+
+.mob-sess-block-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.3rem .7rem;border-radius:20px;
+  background:var(--mob-accent-dim);border:1px solid var(--mob-accent-border);
+  font-family:var(--fm);font-size:.5rem;color:var(--mob-accent);
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:1rem;
+}
+.mob-sess-block-tag-dot{width:5px;height:5px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
+
+.mob-sess-ex-name{
+  font-family:var(--fd);font-size:1.6rem;font-weight:700;color:var(--mob-text);
+  line-height:1.15;letter-spacing:.005em;margin-bottom:.4rem;
+}
+.mob-sess-ex-format{
+  font-family:var(--fb);font-size:.85rem;color:var(--mob-accent2);
+  font-weight:500;margin-bottom:1rem;
+}
+.mob-sess-ex-cue{
+  font-family:var(--fb);font-size:.85rem;color:var(--mob-muted);
+  font-style:italic;line-height:1.5;margin-bottom:1.5rem;
+  padding:.8rem .9rem;background:var(--mob-s2);border-left:2px solid var(--mob-accent);border-radius:0 8px 8px 0;
+}
+
+/* Timer display */
+.mob-timer{
+  text-align:center;padding:1.2rem 0 1.5rem;
+}
+.mob-timer-val{
+  font-family:var(--fd);font-size:4rem;font-weight:800;color:var(--mob-text);
+  line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+}
+.mob-timer-val.running{color:var(--mob-accent)}
+.mob-timer-val.paused{color:var(--mob-muted)}
+.mob-timer-lbl{
+  font-family:var(--fm);font-size:.5rem;color:var(--mob-muted);
+  letter-spacing:.16em;text-transform:uppercase;margin-top:.5rem;
+}
+
+/* Ressenti 1-5 slider */
+.mob-rating-block{
+  margin:1.2rem 0;padding:1rem;
+  background:var(--mob-s2);border:1px solid var(--mob-border);border-radius:10px;
+}
+.mob-rating-lbl{
+  font-family:var(--fm);font-size:.55rem;color:var(--mob-muted);
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:.7rem;text-align:center;
+}
+.mob-rating-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem;
+}
+.mob-rating-btn{
+  aspect-ratio:1;background:var(--mob-s3);border:1px solid var(--mob-border2);
+  border-radius:8px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;
+  font-family:var(--fd);font-weight:700;color:var(--mob-muted);
+  transition:all .15s;
+}
+.mob-rating-btn:hover{border-color:var(--mob-accent);color:var(--mob-accent2)}
+.mob-rating-btn.sel{
+  background:var(--mob-accent-dim2);border-color:var(--mob-accent);color:var(--mob-accent);
+  box-shadow:0 0 0 3px var(--mob-accent-glow);
+}
+.mob-rating-btn-val{font-size:1.05rem;line-height:1}
+.mob-rating-btn-emoji{font-size:.7rem}
+
+/* Controls */
+.mob-sess-controls{
+  padding:.8rem 1.125rem 1rem;
+  border-top:1px solid var(--mob-border);
+  display:flex;gap:.5rem;
+  background:var(--mob-bg);
+}
+.mob-sess-ctrl{
+  flex:1;padding:.85rem .5rem;
+  background:var(--mob-s2);border:1px solid var(--mob-border2);border-radius:10px;
+  font-family:var(--fd);font-size:.7rem;font-weight:700;color:var(--mob-text);
+  letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;justify-content:center;gap:.35rem;
+}
+.mob-sess-ctrl:hover{border-color:var(--mob-accent)}
+.mob-sess-ctrl.primary{background:var(--mob-accent);color:#0a0d0c;border-color:var(--mob-accent)}
+.mob-sess-ctrl.primary:hover{background:var(--mob-accent2)}
+.mob-sess-ctrl:disabled{opacity:.4;cursor:not-allowed}
+.mob-sess-ctrl svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* KPI Tracking section */
+.mob-kpi-section{margin:1.5rem 1.125rem .5rem}
+.mob-kpi-title{
+  font-family:var(--fm);font-size:.58rem;color:var(--mob-muted);
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:.7rem;
+  padding-left:.2rem;
+}
+.mob-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.mob-kpi-card{
+  background:var(--mob-s2);border:1px solid var(--mob-border);
+  border-radius:10px;padding:.85rem .9rem;
+}
+.mob-kpi-card-lbl{
+  font-family:var(--fm);font-size:.46rem;color:var(--mob-muted);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;
+}
+.mob-kpi-val{
+  font-family:var(--fd);font-size:1.4rem;font-weight:700;color:var(--mob-text);
+  line-height:1;display:flex;align-items:baseline;gap:.25rem;
+}
+.mob-kpi-unit{font-size:.7rem;color:var(--mob-muted);font-weight:400}
+.mob-kpi-trend{
+  font-family:var(--fm);font-size:.5rem;color:var(--mob-muted);
+  letter-spacing:.06em;margin-top:.3rem;
+}
+.mob-kpi-trend.up{color:var(--ok2)}
+.mob-kpi-trend.down{color:var(--warn)}
+.mob-kpi-spark{margin-top:.4rem;height:24px}
+.mob-kpi-empty{
+  font-family:var(--fb);font-size:.62rem;color:var(--mob-muted);
+  font-style:italic;text-align:center;padding:.4rem 0;
+}
+
+/* History */
+.mob-hist-section{margin:1.5rem 1.125rem 1rem}
+.mob-hist-item{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.7rem .8rem;background:var(--mob-s2);border:1px solid var(--mob-border);
+  border-radius:10px;margin-bottom:.45rem;
+}
+.mob-hist-date{
+  font-family:var(--fd);font-weight:700;color:var(--mob-accent);
+  font-size:.85rem;min-width:2.5rem;text-align:center;line-height:1;
+}
+.mob-hist-date small{display:block;font-size:.5rem;color:var(--mob-muted);font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem;font-family:var(--fm)}
+.mob-hist-info{flex:1;min-width:0}
+.mob-hist-feel{
+  font-family:var(--fb);font-size:.7rem;color:var(--mob-text);font-weight:500;
+}
+.mob-hist-detail{
+  font-family:var(--fm);font-size:.5rem;color:var(--mob-muted);
+  letter-spacing:.06em;margin-top:.18rem;
+}
+.mob-hist-empty{
+  text-align:center;padding:1.5rem 1rem;color:var(--mob-muted);
+  font-family:var(--fb);font-size:.78rem;font-style:italic;
+}
+
+/* Adapter nav pour 5 boutons */
+.nav .nb{font-size:.5rem;padding:.6rem .15rem}
+.nav .nb svg{width:16px;height:16px}
+
+/* Completion screen */
+.mob-complete{
+  text-align:center;padding:2rem 1.5rem;
+}
+.mob-complete-icon{
+  width:64px;height:64px;margin:0 auto 1rem;
+  border-radius:50%;background:var(--mob-accent-dim2);border:2px solid var(--mob-accent);
+  display:flex;align-items:center;justify-content:center;
+}
+.mob-complete-icon svg{width:32px;height:32px;stroke:var(--mob-accent);fill:none;stroke-width:2.5}
+.mob-complete-title{
+  font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--mob-text);
+  margin-bottom:.4rem;letter-spacing:.01em;
+}
+.mob-complete-sub{
+  font-family:var(--fb);font-size:.78rem;color:var(--mob-muted);
+  margin-bottom:1.5rem;line-height:1.5;
+}
+
+/* KPI input final */
+.mob-final-kpi{
+  background:var(--mob-s2);border:1px solid var(--mob-border);
+  border-radius:12px;padding:1rem;margin:.5rem 0;text-align:left;
+}
+.mob-final-kpi-lbl{
+  font-family:var(--fm);font-size:.55rem;color:var(--mob-muted);
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;
+}
+.mob-final-kpi-input{
+  width:100%;background:var(--mob-s3);border:1px solid var(--mob-border2);
+  border-radius:8px;padding:.7rem .9rem;
+  font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--mob-text);
+  text-align:center;
+}
+.mob-final-kpi-input:focus{outline:none;border-color:var(--mob-accent)}
+.mob-final-kpi-hint{
+  font-family:var(--fb);font-size:.6rem;color:var(--mob-muted);
+  font-style:italic;margin-top:.4rem;
+}
 </style>
 </head>
 <body>
@@ -795,6 +1169,53 @@ body::after{
   </div>
   <div class="scr-inner" style="padding-top:.75rem" id="lib-body"></div>
 </div>
+
+<!-- MOBILITY SCREEN -->
+<div class="scr" id="scr-mob">
+  <div class="mob-header">
+    <div class="mob-eyebrow">Programme dédié</div>
+    <div class="mob-title">Mobi<span>lité</span></div>
+    <div class="mob-sub">Cheville · hanche · thoracique · épaule</div>
+  </div>
+  <div class="mob-overview">
+    <div class="mob-ov-grid">
+      <div class="mob-ov-cell"><div class="mob-ov-val"><span>5</span></div><div class="mob-ov-lbl">Blocs</div></div>
+      <div class="mob-ov-cell"><div class="mob-ov-val"><span>32</span></div><div class="mob-ov-lbl">Exercices</div></div>
+      <div class="mob-ov-cell"><div class="mob-ov-val"><span>60</span><span style="font-size:.75rem;color:var(--mob-muted);font-weight:400">min</span></div><div class="mob-ov-lbl">Durée</div></div>
+    </div>
+    <button class="mob-start-btn" onclick="mobStartSession()">Démarrer la séance</button>
+  </div>
+
+  <div id="mob-blocks-preview"></div>
+
+  <div class="mob-kpi-section">
+    <div class="mob-kpi-title">Indicateurs clés</div>
+    <div class="mob-kpi-grid" id="mob-kpi-grid"></div>
+  </div>
+
+  <div class="mob-hist-section">
+    <div class="mob-kpi-title">Historique des séances</div>
+    <div id="mob-hist-body"></div>
+  </div>
+</div>
+
+<!-- MOBILITY SESSION OVERLAY (timer guidé) -->
+<div class="mob-session-overlay" id="mob-sess">
+  <div class="mob-sess-top">
+    <button class="mob-sess-close" onclick="mobAbortSession()" aria-label="Fermer">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="mob-sess-progress-wrap">
+      <div class="mob-sess-progress-label">
+        <span id="mob-sess-step">Exercice 1 / 28</span>
+        <span id="mob-sess-elapsed">0:00 / 60:00</span>
+      </div>
+      <div class="mob-sess-progress-bar"><div class="mob-sess-progress-fill" id="mob-sess-progress-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+  <div class="mob-sess-body" id="mob-sess-body"></div>
+  <div class="mob-sess-controls" id="mob-sess-controls"></div>
+</div>
 </div>
 
 <!-- NAV -->
@@ -806,6 +1227,10 @@ body::after{
   <button class="nb" id="nb-perf" onclick="go('perf')">
     <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
     Perfs
+  </button>
+  <button class="nb" id="nb-mob" onclick="go('mob')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v6"/><path d="M8 11l4 2 4-2"/><path d="M8 21l4-8 4 8"/><path d="M8 21l-1-2"/><path d="M16 21l1-2"/></svg>
+    Mobilité
   </button>
   <button class="nb" id="nb-lib" onclick="go('lib')">
     <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -838,130 +1263,144 @@ body::after{
 <script>
 // ════════ ROTATIONS ════════
 // ════════════════════════════════════════════════════════
-// EXERCISE DATABASE v10.2
+// EXERCISE DATABASE v10.3
 //
-// SÉANCE COURTE (~55 min) : 2 patterns × [composé + 1 aux]
-//   = 2 exos/pattern, 8–10 séries totales, réaliste
+// Rotation INDÉPENDANTE par slot : main / aux / vol cyclent
+// chacun de leur côté basés sur le compteur de séances done.
+// Plus de doublons "Press debout 3 fois d'affilée" car chaque slot
+// tourne séparément. Sur 9 séances Push, tu verras 27 combos différents
+// max (3 main × 3 aux × 3 vol).
 //
-// SÉANCE LONGUE (~1h20–1h30) : 2 patterns × [composé + 1 aux + 1 vol]
-//   + superset bras SEULEMENT si pas de Legs dans la séance
-//   = 3 exos/pattern + éventuel superset bras
+// SÉANCE COURTE (~55 min) : 2 patterns × [main + aux]
+// SÉANCE LONGUE (~1h20–1h30) : 2 patterns × [main + aux + vol]
+// + superset bras si pas de Legs
 //
-// LEGS : Squat + SDT uniquement (rotation A/B)
-//   Pas de leg press, hip thrust, leg curl en composé principal
-//   Mollets optionnels en fin si Legs présent
+// LEGS : main = Squat (fixe car c'est l'exo central)
+//        aux = SDT roumain / SDT conventionnel / Good morning (rotation)
+//        vol = Mollets (variantes via alts)
 // ════════════════════════════════════════════════════════
 
-const PUSH_ROTATIONS=[
-  // A — Horizontal
-  {main:{name:'Développé couché barre',sets:5,reps:'3–5',cat:'strength',
+const PUSH_MAINS=[
+  {name:'Développé couché barre',sets:5,reps:'3–5',cat:'strength',label:'Horizontal lourd',
     alts:[{name:'Développé couché haltères',note:'Amplitude plus grande'},{name:'Smith machine couché',note:'Guidage barre'},{name:'Pompes lestées',note:'Sans banc'}]},
-   aux:{name:'Press épaules barre (debout)',sets:4,reps:'5–7',cat:'strength',
-    alts:[{name:'Press épaules haltères assis',note:'Plus de liberté'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},
-   vol:{name:'Élévations latérales câble',sets:3,reps:'12–15',cat:'iso',
-    alts:[{name:'Élévations latérales haltères',note:'Version classique'},{name:'Face pull corde',note:'Rotateurs externes'},{name:'Élévations machine',note:'Guidé'}]},
-   label:'Horizontal lourd'},
-  // B — Incliné
-  {main:{name:'Développé incliné barre 30°',sets:5,reps:'3–5',cat:'strength',
+  {name:'Développé incliné barre 30°',sets:5,reps:'3–5',cat:'strength',label:'Incliné 30°',
     alts:[{name:'Développé incliné haltères',note:'Meilleur étirement pectoral'},{name:'Développé incliné machine',note:'Guidé'},{name:'Pompes pieds surélevés',note:'Sans banc'}]},
-   aux:{name:'Press épaules haltères assis',sets:4,reps:'6–8',cat:'strength',
-    alts:[{name:'Press épaules barre debout',note:'Composé classique'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},
-   vol:{name:'Écarté câble prise basse (fly)',sets:3,reps:'12–14',cat:'iso',
-    alts:[{name:'Écarté haltères plat',note:'Accessible partout'},{name:'Pec deck machine',note:'Isolation stricte'},{name:'Crossover câble debout',note:'Angle polyvalent'}]},
-   label:'Incliné 30°'},
-  // C — Décliné / Dips
-  {main:{name:'Dips lestés (buste incliné, pecs)',sets:5,reps:'4–6',cat:'strength',
-    alts:[{name:'Développé décliné barre',note:'Si barre de dips indisponible'},{name:'Développé décliné haltères',note:'Amplitude maximale'},{name:'Écarté câble prise haute',note:'Tension constante pec bas'}]},
-   aux:{name:'Press épaules barre (debout)',sets:4,reps:'5–7',cat:'strength',
+  {name:'Dips lestés (buste incliné, pecs)',sets:5,reps:'4–6',cat:'strength',label:'Décliné / Dips',
+    alts:[{name:'Développé décliné barre',note:'Si barre de dips indisponible'},{name:'Développé décliné haltères',note:'Amplitude maximale'},{name:'Écarté câble prise haute',note:'Tension constante pec bas'}]}
+];
+
+const PUSH_AUXS=[
+  {name:'Press épaules barre (debout)',sets:4,reps:'5–7',cat:'strength',
     alts:[{name:'Press épaules haltères assis',note:'Plus de liberté'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},
-   vol:{name:'Développé incliné haltères',sets:3,reps:'10–12',cat:'hyper',
-    alts:[{name:'Développé incliné barre',note:'Plus de charge possible'},{name:'Écarté câble prise basse',note:'Tension constante pec bas'},{name:'Pec deck machine',note:'Isolation stricte'}]},
-   label:'Décliné / Dips'}
+  {name:'Press épaules haltères assis',sets:4,reps:'6–8',cat:'strength',
+    alts:[{name:'Press épaules barre debout',note:'Composé classique'},{name:'Press militaire machine',note:'Trajectoire guidée'},{name:'Press Arnold',note:'3 faisceaux'}]},
+  {name:'Press Arnold haltères',sets:4,reps:'8–10',cat:'strength',
+    alts:[{name:'Press épaules haltères assis',note:'Plus simple'},{name:'Press épaules barre debout',note:'Composé classique'},{name:'Press militaire machine',note:'Guidé'}]}
 ];
 
-const PULL_ROTATIONS=[
-  // A — Vertical prise large
-  {main:{name:'Tractions lestées (prise large)',sets:5,reps:'3–5',cat:'strength',
+const PUSH_VOLS=[
+  {name:'Élévations latérales câble',sets:3,reps:'12–15',cat:'iso',
+    alts:[{name:'Élévations latérales haltères',note:'Version classique'},{name:'Face pull corde',note:'Rotateurs externes'},{name:'Élévations machine',note:'Guidé'}]},
+  {name:'Écarté câble prise basse (fly)',sets:3,reps:'12–14',cat:'iso',
+    alts:[{name:'Écarté haltères plat',note:'Accessible partout'},{name:'Pec deck machine',note:'Isolation stricte'},{name:'Crossover câble debout',note:'Angle polyvalent'}]},
+  {name:'Extension triceps poulie corde',sets:3,reps:'10–12',cat:'hyper',
+    alts:[{name:'Extension haltère au-dessus de la tête',note:'Étirement maximal'},{name:'Skull crusher EZ-bar',note:'Charge plus lourde'},{name:'Dips entre bancs',note:'Sans matériel'}]}
+];
+
+const PULL_MAINS=[
+  {name:'Tractions lestées (prise large)',sets:5,reps:'3–5',cat:'strength',label:'Vertical prise large',
     alts:[{name:'Tirage poulie haute prise large',note:'Charge ajustable'},{name:'Tractions assistées machine',note:'Version allégée'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'}]},
-   aux:{name:'Rowing barre pronation',sets:4,reps:'5–7',cat:'strength',
-    alts:[{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Rowing machine chest-supported',note:'Enlève charge lombaire'},{name:'Tirage horizontal câble',note:'Tension constante'}]},
-   vol:{name:'Face pull corde',sets:3,reps:'15',cat:'iso',
-    alts:[{name:'Oiseau haltères assis',note:'Sans poulie'},{name:'Tirage horizontal câble prise large',note:'Accent rhomboïdes'},{name:'Rowing machine prise large',note:'Version guidée'}]},
-   label:'Vertical prise large'},
-  // B — Rowing supination
-  {main:{name:'Rowing barre supination',sets:5,reps:'4–6',cat:'strength',
+  {name:'Rowing barre supination',sets:5,reps:'4–6',cat:'strength',label:'Rowing horizontal',
     alts:[{name:'Rowing haltère unilatéral',note:'Unilatéral'},{name:'Smith machine rowing',note:'Trajectoire fixe'},{name:'Tirage câble serrée',note:'Tension constante'}]},
-   aux:{name:'Tractions prise neutre',sets:4,reps:'5–7',cat:'strength',
-    alts:[{name:'Tirage poulie haute prise neutre',note:'Charge ajustable'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'},{name:'Rowing T-bar',note:'Alternative'}]},
-   vol:{name:'Pull-over poulie haute',sets:3,reps:'10–12',cat:'hyper',
-    alts:[{name:'Pull-over haltère couché',note:'Liberté de mouvement'},{name:'Pull-over câble basse poulie',note:'Angle inversé'},{name:'Tirage poulie basse prise large',note:'Alternative'}]},
-   label:'Rowing horizontal'},
-  // C — Prise neutre
-  {main:{name:'Tractions prise neutre',sets:5,reps:'3–5',cat:'strength',
-    alts:[{name:'Tirage poulie haute prise neutre',note:'Charge ajustable'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'},{name:'Rowing T-bar',note:'Alternative'}]},
-   aux:{name:'Rowing barre pronation',sets:4,reps:'5–7',cat:'strength',
-    alts:[{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Rowing machine chest-supported',note:'Enlève charge lombaire'},{name:'Tirage horizontal câble',note:'Tension constante'}]},
-   vol:{name:'Tirage horizontal câble (prise serrée)',sets:3,reps:'10–12',cat:'hyper',
-    alts:[{name:'Rowing machine prise serrée',note:'Guidé'},{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Pull-over câble basse poulie',note:'Grand dorsal bas'}]},
-   label:'Prise neutre'}
+  {name:'Tractions prise neutre',sets:5,reps:'3–5',cat:'strength',label:'Prise neutre',
+    alts:[{name:'Tirage poulie haute prise neutre',note:'Charge ajustable'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'},{name:'Rowing T-bar',note:'Alternative'}]}
 ];
 
-// LEGS : uniquement Squat + SDT, rotation A/B
-// Pas de leg press ni hip thrust ici — trop long, redondant, double-hop
-const LEGS_ROTATIONS=[
-  // A — Squat + SDT roumain (ischio/fessiers dominants)
-  {main:{name:'Squat barre',sets:5,reps:'3–5',cat:'strength',
-    alts:[{name:'Hack squat machine',note:'Si rack indisponible'},{name:'Goblet squat haltère',note:'Mobilité / débutant'},{name:'Leg press pieds hauts',note:'Moins de compression spinale'}]},
-   aux:{name:'Soulevé de terre roumain',sets:4,reps:'5–7',cat:'strength',
-    alts:[{name:'Good morning barre',note:'Renforcement postérieur'},{name:'Leg curl couché',note:'Isolation ischio'},{name:'Hip thrust barre',note:'Focus fessiers'}]},
-   vol:{name:'Mollets debout (machine ou barre)',sets:3,reps:'12–15',cat:'iso',
-    alts:[{name:'Mollets assis (soleus)',note:'Accent sur le soleus'},{name:'Mollets unijambiste haltère',note:'Unilatéral'},{name:'Mollets à la presse',note:'Charge ajustable'}]},
-   label:'Squat + SDT roumain'},
-  // B — Squat + SDT conventionnel (global, plus lourd)
-  {main:{name:'Squat barre',sets:5,reps:'3–5',cat:'strength',
-    alts:[{name:'Hack squat machine',note:'Si rack indisponible'},{name:'Goblet squat',note:'Mobilité'},{name:'Leg press pieds hauts',note:'Alternative'}]},
-   aux:{name:'Soulevé de terre conventionnel',sets:4,reps:'3–5',cat:'strength',
-    alts:[{name:'Soulevé de terre sumo',note:'Placement plus large'},{name:'Trap bar deadlift',note:'Plus sécurisé dos'},{name:'SDT roumain',note:'Si lombaires fatigués'}]},
-   vol:{name:'Mollets debout (machine ou barre)',sets:3,reps:'12–15',cat:'iso',
-    alts:[{name:'Mollets assis (soleus)',note:'Accent sur le soleus'},{name:'Mollets unijambiste haltère',note:'Unilatéral'},{name:'Mollets à la presse',note:'Charge ajustable'}]},
-   label:'Squat + SDT conventionnel'}
+const PULL_AUXS=[
+  {name:'Rowing barre pronation',sets:4,reps:'5–7',cat:'strength',
+    alts:[{name:'Rowing haltère unilatéral',note:'Corrige déséquilibres'},{name:'Rowing machine chest-supported',note:'Enlève charge lombaire'},{name:'Tirage horizontal câble',note:'Tension constante'}]},
+  {name:'Tirage horizontal câble (prise serrée)',sets:4,reps:'6–8',cat:'strength',
+    alts:[{name:'Rowing machine prise serrée',note:'Guidé'},{name:'Rowing T-bar',note:'Alternative'},{name:'Rowing haltère unilatéral',note:'Unilatéral'}]},
+  {name:'Tractions prise neutre',sets:4,reps:'5–7',cat:'strength',
+    alts:[{name:'Tirage poulie haute prise neutre',note:'Charge ajustable'},{name:'Tirage poulie haute serrée',note:'Grand dorsal bas'},{name:'Tractions assistées machine',note:'Version allégée'}]}
 ];
-// Legs rotation = 2 cycles (A/B), pas 3
-const LEGS_ROTATION_COUNT=2;
+
+const PULL_VOLS=[
+  {name:'Face pull corde',sets:3,reps:'15',cat:'iso',
+    alts:[{name:'Oiseau haltères assis',note:'Sans poulie'},{name:'Tirage horizontal câble prise large',note:'Accent rhomboïdes'},{name:'Rowing machine prise large',note:'Version guidée'}]},
+  {name:'Pull-over poulie haute',sets:3,reps:'10–12',cat:'hyper',
+    alts:[{name:'Pull-over haltère couché',note:'Liberté de mouvement'},{name:'Pull-over câble basse poulie',note:'Angle inversé'},{name:'Tirage poulie basse prise large',note:'Alternative'}]},
+  {name:'Curl haltères incliné',sets:3,reps:'10–12',cat:'hyper',
+    alts:[{name:'Curl barre droite',note:'Plus de charge'},{name:'Curl marteau haltères',note:'Brachial + avant-bras'},{name:'Curl pupitre (preacher)',note:'Isolation stricte'}]}
+];
+
+const LEGS_MAINS=[
+  {name:'Squat barre',sets:5,reps:'3–5',cat:'strength',label:'Squat dominant',
+    alts:[{name:'Hack squat machine',note:'Si rack indisponible'},{name:'Goblet squat haltère',note:'Mobilité'},{name:'Leg press pieds hauts',note:'Moins de compression spinale'}]}
+];
+// Legs main = Squat uniquement (1 seul, donc rotation = 1)
+
+const LEGS_AUXS=[
+  {name:'Soulevé de terre roumain',sets:4,reps:'5–7',cat:'strength',
+    alts:[{name:'Good morning barre',note:'Renforcement postérieur'},{name:'Leg curl couché',note:'Isolation ischio'},{name:'Hip thrust barre',note:'Focus fessiers'}]},
+  {name:'Soulevé de terre conventionnel',sets:4,reps:'3–5',cat:'strength',
+    alts:[{name:'Soulevé de terre sumo',note:'Placement plus large'},{name:'Trap bar deadlift',note:'Plus sécurisé dos'},{name:'SDT roumain',note:'Si lombaires fatigués'}]}
+];
+
+const LEGS_VOLS=[
+  {name:'Mollets debout (machine ou barre)',sets:3,reps:'12–15',cat:'iso',
+    alts:[{name:'Mollets assis (soleus)',note:'Accent sur le soleus'},{name:'Mollets unijambiste haltère',note:'Unilatéral'},{name:'Mollets à la presse',note:'Charge ajustable'}]}
+];
 
 const ARMS_SUPERSET=[
   {name:'Curl barre / Extension corde (Superset)',sets:2,reps:'10–12',cat:'iso',
     alts:[{name:'Curl EZ-bar / Skull crusher',note:'Moins de stress poignets'},{name:'Curl haltères / Dips bancs',note:'Si poulie indisponible'},{name:'Curl câble / Extension poulie basse',note:'Tension constante'}]}
 ];
 
-function getPatternRotationIdx(pat){
-  const total=pat==='legs'?LEGS_ROTATION_COUNT:3;
+// Returns total count of done sessions including this pattern
+function countDonePatternSessions(pat){
   let count=0;
-  Object.values(ST.sessions).forEach(s=>{if(s.done&&s.patterns&&s.patterns.includes(pat))count++;});
-  return count%total;
+  Object.values(ST.sessions).forEach(s=>{
+    if(s&&s.done&&s.patterns&&s.patterns.includes(pat))count++;
+  });
+  return count;
+}
+
+function getPatternRotationIdx(pat){
+  // Legacy : returns the index used for the MAIN exercise label
+  // Kept for compatibility with display code that shows "Cycle A/B/C"
+  const pools=getPoolsFor(pat);
+  const count=countDonePatternSessions(pat);
+  return count%pools.mains.length;
+}
+
+function getPoolsFor(pat){
+  if(pat==='push')return{mains:PUSH_MAINS,auxs:PUSH_AUXS,vols:PUSH_VOLS};
+  if(pat==='pull')return{mains:PULL_MAINS,auxs:PULL_AUXS,vols:PULL_VOLS};
+  return{mains:LEGS_MAINS,auxs:LEGS_AUXS,vols:LEGS_VOLS};
 }
 
 // ════════════════════════════════════════════════════════
-// SÉANCE COURTE  (~55 min)
-//   2 patterns prioritaires × [main + aux]
-//   = 9 séries totales/pattern, transitions incluses
-//
-// SÉANCE LONGUE  (~1h20–1h30)
-//   2 patterns prioritaires × [main + aux + vol]
-//   + superset bras UNIQUEMENT si Legs absent (sinon trop long)
+// Pick exercises with INDEPENDENT rotation per slot.
+// Each slot's index = (count + offset) % slot.length
+// This makes main/aux/vol cycle independently — no more "Press debout 3x".
 // ════════════════════════════════════════════════════════
 function getRotationExos(pat,duration){
-  const idx=getPatternRotationIdx(pat);
-  let rot;
-  if(pat==='push')rot=PUSH_ROTATIONS[idx];
-  else if(pat==='pull')rot=PULL_ROTATIONS[idx];
-  else rot=LEGS_ROTATIONS[idx];
+  const pools=getPoolsFor(pat);
+  const count=countDonePatternSessions(pat);
+  // Independent rotation per slot
+  const mainIdx=count%pools.mains.length;
+  const auxIdx=count%pools.auxs.length;
+  const volIdx=count%pools.vols.length;
+  const main=pools.mains[mainIdx];
+  const aux=pools.auxs[auxIdx];
+  const vol=pools.vols[volIdx];
+  const angle=main.label||main.name;
 
   if(duration==='short'){
-    return{exos:[rot.main,rot.aux],angle:rot.label};
+    return{exos:[main,aux],angle};
   }else{
-    // Long : main + aux + vol
-    return{exos:[rot.main,rot.aux,rot.vol],angle:rot.label};
+    return{exos:[main,aux,vol],angle};
   }
 }
 
@@ -2489,6 +2928,499 @@ function buildLibCard(ex){
   </div>`;
 }
 
+// ════════════════════════════════════════════════════════
+// ═══════════════════ MOBILITY MODULE ═══════════════════
+// ════════════════════════════════════════════════════════
+// Programme dédié mobilité — 5 blocs, 28 exercices, 60 min
+// Stockage : localStorage clé 'bloc8_mob' (séparée de la data muscu)
+// État runtime : MOB_RUN (timer, index, ratings de la session active)
+// ════════════════════════════════════════════════════════
+
+const MOB_BLOCKS=[
+  {
+    id:'b1', title:'Réveil articulaire — CARs', dur:600, // 10 min
+    color:'var(--mob-b1)',
+    desc:'Pas de charge · Lenteur extrême · Amplitude maximale contrôlée',
+    exos:[
+      {n:'Neck CARs',f:'3 cercles lents × chaque sens',t:60,cue:'Menton à la poitrine → oreille vers épaule → tête en arrière. Lenteur sans à-coups.'},
+      {n:'Shoulder CARs',f:'3 cercles × chaque sens × 2 bras',t:90,cue:'Bras tendu, corps gainé. Isoler l\'épaule, pas le tronc.'},
+      {n:'T-spine rotations (quadrupédie)',f:'8 reps / côté',t:90,cue:'Main derrière la nuque. Coude vers le ciel, suivre du regard.'},
+      {n:'Hip CARs (quadrupédie)',f:'3 cercles × chaque sens × 2 jambes',t:120,cue:'Genou large, bassin stable, amplitude max.'},
+      {n:'Ankle CARs',f:'5 cercles × chaque sens × 2 pieds',t:90,cue:'Assis jambe croisée. Isoler la cheville, le tibia ne bouge pas.'},
+      {n:'Respiration nasale & scan corporel',f:'30 sec',t:30,cue:'Identifier les zones raides du jour. Tracking ressenti à la fin du bloc.'}
+    ]
+  },
+  {
+    id:'b2', title:'Chaîne basse — cheville & hanche',dur:1200, // 20 min
+    color:'var(--mob-b2)', tag:'PRIORITAIRE',
+    desc:'Cible #1. Travail isométrique chargé en bout d\'amplitude.',
+    exos:[
+      {n:'Knee-to-wall',f:'10 reps lentes/côté + tenue 30s en bout',t:120,cue:'Mesurer la distance orteils-mur (cm). C\'est ton KPI cheville. Talon collé au sol.'},
+      {n:'Tibialis raises élastique',f:'2 × 15 reps',t:120,cue:'Élastique sur avant-pied. Monter orteils contre résistance. Renforce l\'antagoniste du mollet.'},
+      {n:'Calf raise excentrique (marche)',f:'2 × 8 reps · 3 sec descente',t:120,cue:'Kettlebell léger en main optionnel. Descente contrôlée sous le niveau du pied.'},
+      {n:'90/90 hip switches',f:'10 transitions lentes',t:120,cue:'Assis, basculer hanches G↔D. Buste droit, mains au sol si besoin.'},
+      {n:'90/90 PAILs/RAILs',f:'2 × côté : 10s push + 10s lift en bout d\'amplitude',t:180,cue:'La pépite. En 90/90, pousser le sol avec le genou avant 10s (PAILs), puis soulever genou avant contre gravité 10s (RAILs). Brutal mais efficace.'},
+      {n:'Cossack squat',f:'6 reps lentes / côté',t:180,cue:'Kettlebell goblet si stable. Talon au sol, hanche basse, autre jambe tendue.'},
+      {n:'Deep squat tenu (Asian squat)',f:'1 × 60–90 sec',t:90,cue:'Talons au sol obligatoires. Si impossible : cales sous talons + s\'accrocher à une barre.'},
+      {n:'Couch stretch',f:'2 × 45 sec / côté',t:90,cue:'Genou arrière contre mur, pied vers le haut. Hanche en extension. Brutal au début, normal.'},
+      {n:'Réévaluation knee-to-wall',f:'Test final',t:60,cue:'Re-mesurer après le bloc. Tu devrais gagner 1-3 cm immédiat. Note la nouvelle valeur.'}
+    ]
+  },
+  {
+    id:'b3', title:'Chaîne haute — thoracique & épaule',dur:900, // 15 min
+    color:'var(--mob-b3)',
+    desc:'Thoracique d\'abord : ça débloque les épaules de moitié. Puis épaules chargées.',
+    exos:[
+      {n:'Bench t-spine extension',f:'8 extensions segmentées',t:90,cue:'Allongé sur banc plat, omoplates sur le bord, mains derrière nuque. Laisser le haut du dos s\'étendre dans le vide.'},
+      {n:'Open book (side-lying windmill)',f:'8 reps / côté lentes',t:90,cue:'Genoux pliés au sol, ouvrir le bras supérieur en rotation, suivre du regard.'},
+      {n:'Quadruped t-spine rotation chargée',f:'8 reps / côté · haltère 2-5 kg',t:120,cue:'Haltère léger dans la main, coude vers ciel. Contrôle de la descente.'},
+      {n:'Shoulder CARs chargés',f:'3 cercles / sens · haltère 1-2 kg',t:120,cue:'Lenteur extrême, amplitude max. La charge augmente l\'engagement neuromusculaire.'},
+      {n:'Dead hang passif',f:'2 × 30 sec à la barre',t:90,cue:'Détendre les épaules, laisser pendre. Si trop intense : pieds au sol partiellement.'},
+      {n:'Active hang (scapular pull)',f:'2 × 8 reps',t:90,cue:'Tirer omoplates vers le bas sans plier les coudes. Active la scapula.'},
+      {n:'Sleeper stretch',f:'2 × 30 sec / côté',t:120,cue:'Critique pour le volley. Allongé sur côté, bras à 90°, pousser avant-bras vers sol. Rotation interne épaule.'},
+      {n:'Cross-body stretch',f:'2 × 30 sec / côté',t:90,cue:'Tirer bras à travers la poitrine. Épaule postérieure.'},
+      {n:'Réévaluation sleeper',f:'Ressenti final',t:30,cue:'Évaluer la gain d\'amplitude sur la rotation interne.'}
+    ]
+  },
+  {
+    id:'b4', title:'Stabilité core / lombaire',dur:600, // 10 min
+    color:'var(--mob-b4)',
+    desc:'PAS de stretch lombaire. Stabilisation profonde uniquement.',
+    exos:[
+      {n:'McGill curl-up',f:'2 × (5 reps × 10s tenue)',t:180,cue:'Une jambe pliée, mains sous lombaires. Lever épaules sans flexion cervicale.'},
+      {n:'Side plank',f:'2 × 30-45 sec / côté',t:180,cue:'Sur genoux ou pieds selon niveau. Aligner épaule-hanche-cheville.'},
+      {n:'Bird-dog',f:'2 × 8 reps/côté · 3 sec tenue',t:180,cue:'Bras + jambe opposés. Hanches stables, pas de rotation du bassin.'},
+      {n:'Dead bug',f:'2 × 8 reps / côté',t:60,cue:'Lombaires plaqués au sol. Alterner bras/jambe opposés, lentement.'}
+    ]
+  },
+  {
+    id:'b5', title:'Cool down',dur:300, // 5 min
+    color:'var(--mob-b5)',
+    desc:'Postures longues + respiration. Activation parasympathique.',
+    exos:[
+      {n:'Child\'s pose',f:'60 sec',t:60,cue:'Respiration nasale profonde, ventre relâché.'},
+      {n:'Pigeon pose',f:'60 sec / côté',t:120,cue:'Hanche externe, sans forcer. Si trop intense : version surélevée sur banc.'},
+      {n:'Supine twist',f:'30 sec / côté',t:60,cue:'Allongé, genoux d\'un côté, regard de l\'autre. Bras en croix.'},
+      {n:'Respiration 4-7-8',f:'4 cycles',t:60,cue:'Inspire 4s, retient 7s, expire 8s. Bouche fermée.'}
+    ]
+  }
+];
+
+const MOB_TOTAL_EX=MOB_BLOCKS.reduce((a,b)=>a+b.exos.length,0);
+const MOB_TOTAL_DUR=MOB_BLOCKS.reduce((a,b)=>a+b.dur,0);
+
+// KPI definitions
+const MOB_KPIS=[
+  {id:'knee_wall',label:'Knee-to-wall',unit:'cm',hint:'Distance orteils-mur (genou touche le mur, talon au sol)'},
+  {id:'deep_squat',label:'Deep squat tenu',unit:'sec',hint:'Durée max en position basse, talons au sol'},
+  {id:'sleeper',label:'Sleeper stretch',unit:'/5',hint:'Ressenti amplitude rotation interne épaule (5=max)'},
+  {id:'global',label:'État général post-séance',unit:'/5',hint:'Bien-être global (5=excellent)'}
+];
+
+// State storage
+function mobLoad(){
+  try{
+    const r=localStorage.getItem('bloc8_mob');
+    if(!r)return{sessions:[],kpis:{}};
+    const p=JSON.parse(r);
+    if(!p||typeof p!=='object')return{sessions:[],kpis:{}};
+    if(!Array.isArray(p.sessions))p.sessions=[];
+    if(!p.kpis||typeof p.kpis!=='object')p.kpis={};
+    return p;
+  }catch(e){return{sessions:[],kpis:{}};}
+}
+function mobSave(){try{localStorage.setItem('bloc8_mob',JSON.stringify(MOB_ST));}catch(e){}}
+let MOB_ST=mobLoad();
+
+// Runtime state (active session)
+let MOB_RUN=null;
+let MOB_TIMER_ID=null;
+
+function fmtTime(s){
+  s=Math.max(0,Math.round(s));
+  const m=Math.floor(s/60);const sec=s%60;
+  return`${m}:${String(sec).padStart(2,'0')}`;
+}
+
+function mobBlockExIndex(blockIdx, exIdx){
+  // Returns global ex index (0-based) from block+exo position
+  let n=0;
+  for(let i=0;i<blockIdx;i++)n+=MOB_BLOCKS[i].exos.length;
+  return n+exIdx;
+}
+
+function mobFlatExos(){
+  // Returns flat array of {block, exo, blockIdx, exoIdx, globalIdx}
+  const out=[];
+  MOB_BLOCKS.forEach((b,bi)=>b.exos.forEach((e,ei)=>{
+    out.push({block:b,exo:e,blockIdx:bi,exoIdx:ei,globalIdx:out.length});
+  }));
+  return out;
+}
+
+// ════════ PREVIEW (page d'accueil mobilité) ════════
+function renderMob(){
+  renderMobBlocksPreview();
+  renderMobKPIs();
+  renderMobHistory();
+}
+
+function renderMobBlocksPreview(){
+  const c=document.getElementById('mob-blocks-preview');
+  if(!c)return;
+  c.innerHTML=MOB_BLOCKS.map((b,bi)=>{
+    const mins=Math.round(b.dur/60);
+    const exosHTML=b.exos.map((e,i)=>`
+      <div class="mob-ex-row">
+        <div class="mob-ex-num">${String(i+1).padStart(2,'0')}</div>
+        <div class="mob-ex-content">
+          <div class="mob-ex-name">${e.n}${b.tag&&i===0?'<em>'+b.tag+'</em>':''}</div>
+          <div class="mob-ex-format">${e.f}</div>
+        </div>
+      </div>`).join('');
+    return`
+      <div class="mob-block" id="mob-block-${b.id}">
+        <div class="mob-block-head" onclick="mobToggleBlock('${b.id}')">
+          <div class="mob-block-dot" style="background:${b.color};color:${b.color}"></div>
+          <div class="mob-block-info">
+            <div class="mob-block-title">${b.title}</div>
+            <div class="mob-block-meta">Bloc ${bi+1} · ${mins} min · ${b.exos.length} exercices</div>
+          </div>
+          <svg class="mob-block-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="mob-block-body">
+          <div class="mob-ex-list">
+            <div class="mob-ex-cue" style="padding:.4rem .5rem .6rem;border-bottom:1px solid var(--mob-border);margin-bottom:.3rem">${b.desc}</div>
+            ${exosHTML}
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function mobToggleBlock(id){
+  const el=document.getElementById('mob-block-'+id);
+  if(!el)return;
+  el.classList.toggle('expanded');
+}
+
+function renderMobKPIs(){
+  const c=document.getElementById('mob-kpi-grid');
+  if(!c)return;
+  c.innerHTML=MOB_KPIS.map(k=>{
+    const hist=MOB_ST.kpis[k.id]||[];
+    if(hist.length===0){
+      return`
+        <div class="mob-kpi-card">
+          <div class="mob-kpi-card-lbl">${k.label}</div>
+          <div class="mob-kpi-empty">Pas encore mesuré</div>
+        </div>`;
+    }
+    const latest=hist[hist.length-1];
+    const prev=hist.length>=2?hist[hist.length-2]:null;
+    let trend='';
+    if(prev){
+      const diff=latest.val-prev.val;
+      const better=k.id==='knee_wall'||k.id==='deep_squat'||k.id==='sleeper'||k.id==='global'?diff>0:diff<0;
+      const sign=diff>0?'+':'';
+      trend=`<div class="mob-kpi-trend ${better?'up':diff===0?'':'down'}">${sign}${diff.toFixed(diff%1===0?0:1)} ${k.unit} vs précédent</div>`;
+    }
+    // Spark line
+    const spark=mobSparkSVG(hist.map(h=>h.val), k.id);
+    return`
+      <div class="mob-kpi-card">
+        <div class="mob-kpi-card-lbl">${k.label}</div>
+        <div class="mob-kpi-val">${latest.val}<span class="mob-kpi-unit">${k.unit}</span></div>
+        ${trend}
+        ${spark}
+      </div>`;
+  }).join('');
+}
+
+function mobSparkSVG(vals, kpiId){
+  if(vals.length<2)return'';
+  const w=120,h=24,pad=2;
+  const min=Math.min(...vals),max=Math.max(...vals);
+  const range=max-min||1;
+  const pts=vals.map((v,i)=>{
+    const x=pad+(i/(vals.length-1))*(w-pad*2);
+    const y=h-pad-((v-min)/range)*(h-pad*2);
+    return`${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+  return`<svg class="mob-kpi-spark" viewBox="0 0 ${w} ${h}" width="100%" preserveAspectRatio="none">
+    <polyline points="${pts}" fill="none" stroke="var(--mob-accent)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${pts.split(' ').pop().split(',')[0]}" cy="${pts.split(' ').pop().split(',')[1]}" r="2" fill="var(--mob-accent)"/>
+  </svg>`;
+}
+
+function renderMobHistory(){
+  const c=document.getElementById('mob-hist-body');
+  if(!c)return;
+  const sessions=[...MOB_ST.sessions].reverse().slice(0,8);
+  if(sessions.length===0){
+    c.innerHTML='<div class="mob-hist-empty">Aucune séance terminée pour le moment.<br/>La première complétée apparaîtra ici.</div>';
+    return;
+  }
+  c.innerHTML=sessions.map(s=>{
+    const d=new Date(s.date);
+    const ratings=s.ratings||{};
+    const valid=Object.values(ratings).filter(v=>typeof v==='number');
+    const avg=valid.length?(valid.reduce((a,b)=>a+b,0)/valid.length).toFixed(1):'—';
+    const day=String(d.getDate()).padStart(2,'0');
+    const month=MONTHS[d.getMonth()].slice(0,3);
+    const completed=s.completedExos||MOB_TOTAL_EX;
+    return`
+      <div class="mob-hist-item">
+        <div class="mob-hist-date">${day}<small>${month}</small></div>
+        <div class="mob-hist-info">
+          <div class="mob-hist-feel">Ressenti moyen ${avg}/5</div>
+          <div class="mob-hist-detail">${completed}/${MOB_TOTAL_EX} exos · ${fmtTime(s.durationSec||0)}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ════════ SESSION ACTIVE (timer guidé) ════════
+function mobStartSession(){
+  const flat=mobFlatExos();
+  MOB_RUN={
+    startedAt:Date.now(),
+    flat:flat,
+    idx:0,
+    remaining:flat[0].exo.t,
+    paused:true,
+    ratings:{}, // global ex idx -> rating 1-5
+    blockRatings:{}, // block id -> rating
+    finalKPIs:{},
+    completedExos:0,
+    phase:'exo' // 'exo' | 'complete'
+  };
+  const ov=document.getElementById('mob-sess');
+  if(ov){ov.classList.add('on');}
+  mobRenderSession();
+}
+
+function mobAbortSession(){
+  if(!MOB_RUN)return;
+  if(MOB_RUN.phase==='complete'){
+    mobCloseSession();return;
+  }
+  if(confirm('Quitter la séance ? Ta progression de session ne sera pas sauvegardée.')){
+    mobCloseSession();
+  }
+}
+
+function mobCloseSession(){
+  if(MOB_TIMER_ID){clearInterval(MOB_TIMER_ID);MOB_TIMER_ID=null;}
+  MOB_RUN=null;
+  const ov=document.getElementById('mob-sess');
+  if(ov)ov.classList.remove('on');
+  renderMob();
+}
+
+function mobRenderSession(){
+  if(!MOB_RUN)return;
+  if(MOB_RUN.phase==='complete'){
+    mobRenderComplete();return;
+  }
+  const cur=MOB_RUN.flat[MOB_RUN.idx];
+  const body=document.getElementById('mob-sess-body');
+  const ctrls=document.getElementById('mob-sess-controls');
+  if(!body||!ctrls)return;
+
+  // Top progress
+  const step=document.getElementById('mob-sess-step');
+  const elapsed=document.getElementById('mob-sess-elapsed');
+  const fill=document.getElementById('mob-sess-progress-fill');
+  if(step)step.textContent=`Exercice ${MOB_RUN.idx+1} / ${MOB_RUN.flat.length}`;
+  // Compute elapsed time: sum of (t - remaining for past) for past exos + (t - remaining current)
+  let elapsedSec=0;
+  for(let i=0;i<MOB_RUN.idx;i++)elapsedSec+=MOB_RUN.flat[i].exo.t;
+  elapsedSec+=cur.exo.t-MOB_RUN.remaining;
+  if(elapsed)elapsed.textContent=`${fmtTime(elapsedSec)} / ${fmtTime(MOB_TOTAL_DUR)}`;
+  if(fill)fill.style.width=`${(MOB_RUN.idx/MOB_RUN.flat.length)*100}%`;
+
+  const rating=MOB_RUN.ratings[cur.globalIdx];
+  const emojis=['','😣','😕','😐','🙂','😌'];
+  const ratingHTML=`
+    <div class="mob-rating-block">
+      <div class="mob-rating-lbl">Ressenti sur cet exercice (1-5)</div>
+      <div class="mob-rating-grid">
+        ${[1,2,3,4,5].map(v=>`
+          <button class="mob-rating-btn ${rating===v?'sel':''}" onclick="mobSetRating(${v})">
+            <span class="mob-rating-btn-val">${v}</span>
+            <span class="mob-rating-btn-emoji">${emojis[v]}</span>
+          </button>`).join('')}
+      </div>
+    </div>`;
+
+  body.innerHTML=`
+    <div class="mob-sess-block-tag">
+      <span class="mob-sess-block-tag-dot" style="background:${cur.block.color}"></span>
+      Bloc ${cur.blockIdx+1} · ${cur.block.title}
+    </div>
+    <div class="mob-sess-ex-name">${cur.exo.n}</div>
+    <div class="mob-sess-ex-format">${cur.exo.f}</div>
+    <div class="mob-sess-ex-cue">${cur.exo.cue}</div>
+    <div class="mob-timer">
+      <div class="mob-timer-val ${MOB_RUN.paused?'paused':'running'}" id="mob-timer-val">${fmtTime(MOB_RUN.remaining)}</div>
+      <div class="mob-timer-lbl">${MOB_RUN.paused?'En pause':'Temps suggéré'}</div>
+    </div>
+    ${ratingHTML}`;
+
+  // Controls
+  const isLast=MOB_RUN.idx===MOB_RUN.flat.length-1;
+  const isFirst=MOB_RUN.idx===0;
+  ctrls.innerHTML=`
+    <button class="mob-sess-ctrl" onclick="mobPrev()" ${isFirst?'disabled':''}>
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Préc.
+    </button>
+    <button class="mob-sess-ctrl primary" onclick="mobToggleTimer()">
+      ${MOB_RUN.paused?'<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="currentColor"/></svg>Démarrer':'<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="currentColor"/><rect x="14" y="4" width="4" height="16" fill="currentColor"/></svg>Pause'}
+    </button>
+    <button class="mob-sess-ctrl" onclick="mobNext()">
+      ${isLast?'Terminer':'Suivant'}
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>`;
+}
+
+function mobSetRating(v){
+  if(!MOB_RUN)return;
+  const cur=MOB_RUN.flat[MOB_RUN.idx];
+  MOB_RUN.ratings[cur.globalIdx]=v;
+  mobRenderSession();
+}
+
+function mobToggleTimer(){
+  if(!MOB_RUN)return;
+  MOB_RUN.paused=!MOB_RUN.paused;
+  if(MOB_RUN.paused){
+    if(MOB_TIMER_ID){clearInterval(MOB_TIMER_ID);MOB_TIMER_ID=null;}
+  }else{
+    if(MOB_TIMER_ID)clearInterval(MOB_TIMER_ID);
+    MOB_TIMER_ID=setInterval(()=>{
+      if(!MOB_RUN||MOB_RUN.paused)return;
+      MOB_RUN.remaining=Math.max(0,MOB_RUN.remaining-1);
+      // Just update timer value, not the whole UI (cheaper)
+      const tv=document.getElementById('mob-timer-val');
+      if(tv)tv.textContent=fmtTime(MOB_RUN.remaining);
+      // Update elapsed
+      const cur=MOB_RUN.flat[MOB_RUN.idx];
+      let elapsedSec=0;
+      for(let i=0;i<MOB_RUN.idx;i++)elapsedSec+=MOB_RUN.flat[i].exo.t;
+      elapsedSec+=cur.exo.t-MOB_RUN.remaining;
+      const el=document.getElementById('mob-sess-elapsed');
+      if(el)el.textContent=`${fmtTime(elapsedSec)} / ${fmtTime(MOB_TOTAL_DUR)}`;
+      // Auto-advance
+      if(MOB_RUN.remaining===0){
+        // Soft bell — vibration if available
+        try{if(navigator.vibrate)navigator.vibrate([100,50,100]);}catch(e){}
+        mobNext();
+      }
+    },1000);
+  }
+  mobRenderSession();
+}
+
+function mobPrev(){
+  if(!MOB_RUN||MOB_RUN.idx===0)return;
+  if(MOB_TIMER_ID){clearInterval(MOB_TIMER_ID);MOB_TIMER_ID=null;}
+  MOB_RUN.idx--;
+  MOB_RUN.remaining=MOB_RUN.flat[MOB_RUN.idx].exo.t;
+  MOB_RUN.paused=true;
+  mobRenderSession();
+}
+
+function mobNext(){
+  if(!MOB_RUN)return;
+  MOB_RUN.completedExos=Math.max(MOB_RUN.completedExos,MOB_RUN.idx+1);
+  if(MOB_RUN.idx===MOB_RUN.flat.length-1){
+    // Session complete
+    if(MOB_TIMER_ID){clearInterval(MOB_TIMER_ID);MOB_TIMER_ID=null;}
+    MOB_RUN.phase='complete';
+    mobRenderComplete();
+    return;
+  }
+  if(MOB_TIMER_ID){clearInterval(MOB_TIMER_ID);MOB_TIMER_ID=null;}
+  MOB_RUN.idx++;
+  MOB_RUN.remaining=MOB_RUN.flat[MOB_RUN.idx].exo.t;
+  MOB_RUN.paused=true;
+  mobRenderSession();
+}
+
+function mobRenderComplete(){
+  const body=document.getElementById('mob-sess-body');
+  const ctrls=document.getElementById('mob-sess-controls');
+  const step=document.getElementById('mob-sess-step');
+  const elapsed=document.getElementById('mob-sess-elapsed');
+  const fill=document.getElementById('mob-sess-progress-fill');
+  if(step)step.textContent='Séance terminée';
+  if(fill)fill.style.width='100%';
+  if(elapsed)elapsed.textContent='Récap KPIs';
+
+  const dur=Math.round((Date.now()-MOB_RUN.startedAt)/1000);
+  const kpis=MOB_KPIS.map(k=>`
+    <div class="mob-final-kpi">
+      <div class="mob-final-kpi-lbl">${k.label}</div>
+      <input class="mob-final-kpi-input" type="number" step="${k.unit==='/5'?'1':'0.5'}" min="0" max="${k.unit==='/5'?'5':'999'}" 
+        id="mob-kpi-${k.id}" placeholder="Valeur en ${k.unit}" value="${MOB_RUN.finalKPIs[k.id]||''}"/>
+      <div class="mob-final-kpi-hint">${k.hint}</div>
+    </div>`).join('');
+
+  body.innerHTML=`
+    <div class="mob-complete">
+      <div class="mob-complete-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="mob-complete-title">Séance complétée</div>
+      <div class="mob-complete-sub">${MOB_RUN.completedExos}/${MOB_TOTAL_EX} exercices · ${fmtTime(dur)}<br/>
+      Renseigne tes 4 KPIs pour suivre tes progrès dans le temps.</div>
+      ${kpis}
+    </div>`;
+
+  ctrls.innerHTML=`
+    <button class="mob-sess-ctrl" onclick="mobCloseSession()">
+      Quitter sans enregistrer
+    </button>
+    <button class="mob-sess-ctrl primary" onclick="mobFinishSession()">
+      Enregistrer la séance
+    </button>`;
+}
+
+function mobFinishSession(){
+  if(!MOB_RUN)return;
+  // Collect KPIs
+  MOB_KPIS.forEach(k=>{
+    const inp=document.getElementById('mob-kpi-'+k.id);
+    if(inp&&inp.value!==''){
+      const v=parseFloat(inp.value);
+      if(!isNaN(v)){
+        MOB_RUN.finalKPIs[k.id]=v;
+        if(!MOB_ST.kpis[k.id])MOB_ST.kpis[k.id]=[];
+        MOB_ST.kpis[k.id].push({date:Date.now(),val:v});
+      }
+    }
+  });
+  const dur=Math.round((Date.now()-MOB_RUN.startedAt)/1000);
+  MOB_ST.sessions.push({
+    date:Date.now(),
+    durationSec:dur,
+    completedExos:MOB_RUN.completedExos,
+    ratings:MOB_RUN.ratings,
+    kpis:MOB_RUN.finalKPIs
+  });
+  mobSave();
+  // Toast
+  const t=document.createElement('div');
+  t.className='toast auto';
+  t.textContent='Séance mobilité enregistrée';
+  document.body.appendChild(t);setTimeout(()=>t.remove(),2400);
+  mobCloseSession();
+}
+
+// ════════════════════════════════════════════════════════
+// ═══════════════ END MOBILITY MODULE ════════════════════
+// ════════════════════════════════════════════════════════
+
 function go(n){
   document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
@@ -2497,6 +3429,7 @@ function go(n){
   if(n==='week')renderDayPanel();
   if(n==='perf')renderPerf();
   if(n==='stats')renderStats();
+  if(n==='mob')renderMob();
   if(n==='lib'){if(!libScrollTarget){libFilter='all';libSearch='';document.querySelectorAll('.lib-filter').forEach((b,i)=>b.classList.toggle('on',i===0));const si=document.getElementById('lib-search');if(si)si.value='';}renderLib();}
 }
 
